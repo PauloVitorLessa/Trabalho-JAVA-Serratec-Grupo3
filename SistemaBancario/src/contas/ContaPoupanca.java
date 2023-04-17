@@ -8,7 +8,7 @@ import pessoas.Pessoa;
 
 public class ContaPoupanca extends Conta{
 	
-	private double rendimento;
+	private double rendimento = 0.022;
 	
 	public ContaPoupanca(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
@@ -46,5 +46,13 @@ public class ContaPoupanca extends Conta{
 		Date date = new Date();
 		System.out.println("Data: " + sdf.format(date));
 		System.out.println("Saldo: " + this.getSaldo());	
+	}
+	public void simular(Double valor, int dias) {
+		Double capital = valor;
+		Double montante;
+	    int tempo = dias;
+	    montante = capital * Math.pow(1 + this.rendimento, tempo); 
+	    System.out.println("Total Simulado em " + dias + " dias de : " + montante);
+	    
 	}
 }
