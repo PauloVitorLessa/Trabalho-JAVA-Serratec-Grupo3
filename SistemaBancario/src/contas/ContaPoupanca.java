@@ -9,7 +9,6 @@ public class ContaPoupanca extends Conta{
 	public ContaPoupanca(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
 	}
-	@Override
 	public void sacar(double valor) {
 		if(this.getSaldo() >= valor && valor > 0) {
 			this.setSaldo(this.getSaldo() - valor);
@@ -19,27 +18,25 @@ public class ContaPoupanca extends Conta{
 			System.out.println("O saque não pode ser realizado!");	
 		}
 	}
-	@Override
 	public void depositar(double valor) {
 		if(valor > 0) {
 			this.setSaldo(this.getSaldo()+valor);
 			System.out.println("Deposito efetuado!");
 		}else {
 			System.out.println("Não foi possível realizar o depósito!");
-		}		
+		}	
 	}
-	@Override
 	public void transferir(double valor, Conta contaDestino) {
 		if(valor > 0 && this.getSaldo()>=valor) {
 			setSaldo(getSaldo() - valor);
-			contaDestino.depositar(valor);
+			double numero = valor;
+			contaDestino.depositar(numero);
 			System.out.println("Transferência concluída!");
 		}else {
 			System.out.println("Saldo insuficiente para fazer a transferência!!");
-		}	
+		}
 	}
-	@Override
 	public void emitirExtrato() {
-		
+		System.out.println();
 	}
 }
