@@ -1,9 +1,13 @@
 package contas;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import agencias.Agencia;
 import pessoas.Pessoa;
 
 public class ContaPoupanca extends Conta{
+	
 	private double rendimento;
 	
 	public ContaPoupanca(Agencia agencia, Pessoa pessoa) {
@@ -26,17 +30,21 @@ public class ContaPoupanca extends Conta{
 			System.out.println("Não foi possível realizar o depósito!");
 		}	
 	}
+	@Override
 	public void transferir(double valor, Conta contaDestino) {
 		if(valor > 0 && this.getSaldo()>=valor) {
 			setSaldo(getSaldo() - valor);
-			double numero = valor;
-			contaDestino.depositar(numero);
+			contaDestino.depositar(valor);
 			System.out.println("Transferência concluída!");
 		}else {
 			System.out.println("Saldo insuficiente para fazer a transferência!!");
 		}
 	}
 	public void emitirExtrato() {
-		System.out.println();
+		System.out.println("### Extrato da Conta Poupança ###");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		System.out.println("Data: " + sdf.format(date));
+		System.out.println("Saldo: " + this.getSaldo());	
 	}
 }

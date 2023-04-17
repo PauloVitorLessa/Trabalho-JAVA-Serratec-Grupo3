@@ -46,4 +46,10 @@ public abstract class Conta implements Operacoes{
 	public ContaEnum getTipo() {
 		return tipo;
 	}
+	public void depositar(double valor) {
+		
+	}
+	public void transferir(double valor, Conta contaDestino) {
+		
+	}
 }
