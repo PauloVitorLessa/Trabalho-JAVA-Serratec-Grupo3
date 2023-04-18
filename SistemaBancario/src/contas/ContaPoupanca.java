@@ -3,7 +3,9 @@ package contas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import Movimentos.Movimentacao;
 import agencias.Agencia;
+import listas.Listas;
 import pessoas.Pessoa;
 
 public class ContaPoupanca extends Conta{
@@ -45,7 +47,40 @@ public class ContaPoupanca extends Conta{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
 		System.out.println("Data: " + sdf.format(date));
-		System.out.println("Saldo: " + this.getSaldo());	
+		System.out.println("Saldo: " + this.getSaldo());
+		for(Movimentacao movimentacao : Listas.movimentacao) {
+			if(movimentacao.getConta() == this.getNumeroConta()) {
+				switch (movimentacao.getTipo()) {
+				case TRANSFERENCIA:
+					System.out.println(movimentacao.getConta());
+					System.out.println(movimentacao.getNumeroContaDestino());
+					System.out.println(movimentacao.getTributo());
+					System.out.println(movimentacao.getValor());
+					System.out.println(movimentacao.getDatahora());
+					System.out.println(movimentacao.getTipo());
+					break;
+					
+				case SAQUE:
+					System.out.println(movimentacao.getConta());
+					System.out.println(movimentacao.getTributo());
+					System.out.println(movimentacao.getValor());
+					System.out.println(movimentacao.getDatahora());
+					System.out.println(movimentacao.getTipo());
+					break;
+					
+				case DEPOSITO:
+					System.out.println(movimentacao.getConta());
+					System.out.println(movimentacao.getTributo());
+					System.out.println(movimentacao.getValor());
+					System.out.println(movimentacao.getDatahora());
+					System.out.println(movimentacao.getTipo());
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
 	}
 	public void simular(Double valor, int dias) {
 		Double capital = valor;
