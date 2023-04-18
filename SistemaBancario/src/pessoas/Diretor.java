@@ -1,6 +1,5 @@
 package pessoas;
 
-import agencias.Agencia;
 import enuns.Cargo;
 import listas.Listas;
 import maps.Maps;
@@ -15,15 +14,17 @@ public class Diretor extends Funcionario{
 	 
 		if(!Maps.mapCpfPessoa.containsKey(CPF)) {
 			if(Maps.mapNumeroAgencia.containsKey(numeroAgencia)) {
+				if(Maps.mapAgenciaGerente.get(numeroAgencia).equals(CPF)) {
 				Pessoa pessoa = new Gerente(nome, CPF, senha, Maps.mapNumeroAgencia.get(numeroAgencia));
 				Listas.pessoa.add(pessoa);
 				Maps.mapCpfPessoa.put(CPF, pessoa);
+				Maps.mapAgenciaGerente.put(numeroAgencia, CPF);
+				System.out.println("Deu bom!!");
 				return true;
-			}
-			
-		}
-		
+				}
+			}	
+		}	
+		System.out.println("Deu ruim!");
 		return false;
 	}
-	
 }

@@ -13,6 +13,10 @@ public class Agencia {
 	private List<Conta> contas = new ArrayList<>();
 	private static int contador = 0;
 	
+	public Agencia() {
+		contador++;
+		this.numeroAgencia = contador;
+	}
 	public Agencia(Gerente gerente) {
 		this.gerente = gerente;
 		contador++;

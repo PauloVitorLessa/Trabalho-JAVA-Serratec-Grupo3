@@ -15,37 +15,31 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 		this.senha = senha;
 		this.tipo = tipo;
+		
 	}
 //=========================================================================================
 
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getCpf() {
 		return cpf;
 	}
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 	public Cargo getTipo() {
 		return tipo;
 	}
-
 	public void setTipo(Cargo tipo) {
 		this.tipo = tipo;
 	}
