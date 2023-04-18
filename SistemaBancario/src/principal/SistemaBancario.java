@@ -1,12 +1,10 @@
 package principal;
 
 import agencias.Agencia;
+import contas.Conta;
 import maps.Maps;
 import menus.Menu;
-import pessoas.Diretor;
-import pessoas.Gerente;
-import pessoas.Pessoa;
-import pessoas.Presidente;
+import pessoas.*;
 
 public class SistemaBancario {
 
@@ -26,8 +24,12 @@ public class SistemaBancario {
 		Pessoa diretor = new Diretor("yago", "123", "123");
 		Maps.mapCpfPessoa.put("123", diretor);
 		
-		((Diretor)diretor).cadastraGerente("allan", "456", "123",agencia1.getNumeroAgencia());
+		Conta corrente = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), diretor.getCpf());
+		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
+		corrente.depositar(10);
+		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
 		
-		Menu.menuLogin();	
+		Menu.menuLogin();
+		
 	}
 }

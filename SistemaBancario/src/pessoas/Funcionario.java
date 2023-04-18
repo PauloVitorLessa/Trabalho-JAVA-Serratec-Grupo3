@@ -25,15 +25,17 @@ public boolean cadastraCliente(String nome, String CPF, String senha) {
 		return false;
 	}
 //=====================================================================================================
-	public void criarContaCorrente(int numeroAgencia, String CPF) {
+	public Conta criarContaCorrente(int numeroAgencia, String CPF) {
 		
 		if(Maps.mapCpfPessoa.containsKey(CPF)) {
 			if(Maps.mapNumeroAgencia.containsKey(numeroAgencia)) {
 				Conta contaCorrente = new ContaCorrente(Maps.mapNumeroAgencia.get(numeroAgencia),Maps.mapCpfPessoa.get(CPF));
 				Listas.conta.add(contaCorrente);
 				Maps.mapNumeroConta.put(contaCorrente.getNumeroConta(),contaCorrente);
+				return contaCorrente;	
 			}
 		}
+		return null;
 	}
 	public void criarContaPoupanca(int numeroAgencia, String CPF) {
 		
