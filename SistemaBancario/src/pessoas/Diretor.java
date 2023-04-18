@@ -1,6 +1,9 @@
 package pessoas;
 
+import agencias.Agencia;
 import enuns.Cargo;
+import listas.Listas;
+import maps.Maps;
 
 public class Diretor extends Funcionario{
 	
@@ -8,4 +11,19 @@ public class Diretor extends Funcionario{
 		super(nome, cpf, senha, Cargo.DIRETOR);	
 	}
 
+ public boolean cadastraGerente(String nome, String CPF, String senha, int numeroAgencia) {
+	 
+		if(!Maps.mapCpfPessoa.containsKey(CPF)) {
+			if(Maps.mapNumeroAgencia.containsKey(numeroAgencia)) {
+				Pessoa pessoa = new Gerente(nome, CPF, senha, Maps.mapNumeroAgencia.get(numeroAgencia));
+				Listas.pessoa.add(pessoa);
+				Maps.mapCpfPessoa.put(CPF, pessoa);
+				return true;
+			}
+			
+		}
+		
+		return false;
+	}
+	
 }

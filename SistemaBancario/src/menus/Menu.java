@@ -51,6 +51,7 @@ public class Menu {
 						System.out.println("DIRETOR LOGADO");
 						System.out.println("DIRETOR LOGADO");
 						System.out.println("DIRETOR LOGADO");
+						break;
 					case PRESIDENTE :
 						System.out.println("PRESIDENTE LOGADO");
 						System.out.println("PRESIDENTE LOGADO");
