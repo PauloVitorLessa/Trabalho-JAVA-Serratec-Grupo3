@@ -78,7 +78,7 @@ public class Menu {
 	public static void menuCliente(Pessoa cliente) {
 		int opcao;
 		opcao = 0;
-		while (opcao != 5) {
+		do {
 
 			System.out.println("===============");
 			System.out.println("1 - Conta Corrente");
@@ -161,7 +161,7 @@ public class Menu {
 				
 			
 			case 2:
-				do {
+				
 					if (Maps.mapCpfContaPoupanca.containsKey(cliente.getCpf())) {
 
 						Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());
@@ -225,10 +225,9 @@ public class Menu {
 						System.out.println("Cliente não possui Conta Poupança !!");
 						break;
 					}
-				} while (opcao != 5);
-			}
+				}
+			} while (opcao != 5);
 		}
 
 	}
 
-}
