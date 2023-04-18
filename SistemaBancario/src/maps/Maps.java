@@ -1,12 +1,12 @@
 package maps;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
-import Movimentos.Movimentacao;
-import contas.Conta;
+import pessoas.Pessoa;
 
 public class Maps {
-	public static Map <Integer, Movimentacao> mapNumeroContaMovimentacao = new LinkedHashMap<>();
+	
+	public static Map<String, Pessoa> mapCpfPessoa = new HashMap<>();
 
 }
