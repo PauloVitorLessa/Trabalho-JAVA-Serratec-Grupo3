@@ -90,9 +90,12 @@ public class Menu {
 			switch (opcao) {
 
 			case 1:
-
+				
 				if (Maps.mapCpfContaCorrente.containsKey(cliente.getCpf())) {
-
+					boolean voltar = false;
+					
+					do {
+						
 					Conta conta = Maps.mapCpfContaCorrente.get(cliente.getCpf());
 
 					System.out.println("Bem vindo a Conta Corrente");
@@ -134,18 +137,29 @@ public class Menu {
 						conta.emitirExtrato();
 						break;
 					case 5:
-						System.exit(0);
+						valor = 0;
+						voltar = true;	
+						
 						break;
 					default:
 						System.out.println("Opção inválida !!");
 						break;
 					}
-				} else {
+					
+					
+					}while (voltar == false );
+					
+					
+				break;	
+				}
+				else {
 					System.out.println("Cliente não possui Conta Corrente !!");
 					break;
-
-				}
-
+		
+					
+				}	
+				
+			
 			case 2:
 				do {
 					if (Maps.mapCpfContaPoupanca.containsKey(cliente.getCpf())) {
@@ -206,6 +220,7 @@ public class Menu {
 							System.out.println("Opção inválida !!");
 							break;
 						}
+						break;
 					} else {
 						System.out.println("Cliente não possui Conta Poupança !!");
 						break;

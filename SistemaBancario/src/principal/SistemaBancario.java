@@ -22,16 +22,24 @@ public class SistemaBancario {
 		
 		
 		Pessoa cliente =((Gerente)gerente).cadastraCliente("paulo", "145", "123");
+		
+		
 		Maps.mapCpfPessoa.put(cliente.getCpf(), cliente);
 		Listas.pessoa.add(cliente);
 		
 		Pessoa diretor = new Diretor("yago", "123", "123");
 		Maps.mapCpfPessoa.put("123", diretor);
 		
+		
+		
 		Conta corrente = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), diretor.getCpf());
 		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
 		corrente.depositar(10);
 		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
+		
+		Conta c1 = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), cliente.getCpf());
+		Maps.mapCpfContaCorrente.put(cliente.getCpf(), c1);
+		
 		
 		Menu.menuLogin();
 		
