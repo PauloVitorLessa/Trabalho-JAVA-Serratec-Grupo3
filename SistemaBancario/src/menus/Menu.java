@@ -83,7 +83,7 @@ public class Menu {
 			System.out.println("===============");
 			System.out.println("1 - Conta Corrente");
 			System.out.println("2 - Conta Poupança");
-			System.out.println("5 - Conta sair");
+			System.out.println("3 - Conta sair");
 			System.out.println("===============");
 
 			opcao = ler.nextInt();
@@ -91,143 +91,157 @@ public class Menu {
 
 			case 1:
 				
-				if (Maps.mapCpfContaCorrente.containsKey(cliente.getCpf())) {
-					boolean voltar = false;
-					
-					do {
-						
-					Conta conta = Maps.mapCpfContaCorrente.get(cliente.getCpf());
-
-					System.out.println("Bem vindo a Conta Corrente");
-					System.out.println("===============");
-					System.out.println("1 - Saque");
-					System.out.println("2 - Deposito");
-					System.out.println("3 - Transferir");
-					System.out.println("4 - Extrato");
-					System.out.println("5 - Sair");
-					System.out.println("===============");
-
-					opcao = ler.nextInt();
-					double valor;
-
-					switch (opcao) {
-					case 1:
-						System.out.println("Digite o valor para sacar: ");
-						valor = ler.nextDouble();
-						conta.sacar(valor);
-						break;
-					case 2:
-						System.out.println("Digite o valor para depositar: ");
-						valor = ler.nextDouble();
-						conta.depositar(valor);
-						break;
-					case 3:
-						System.out.println("Digite o valor para transferir: ");
-						valor = ler.nextDouble();
-						System.out.println("Informe o número da conta destino: ");
-						int contaDestino = ler.nextInt();
-						if (Maps.mapNumeroConta.containsKey(contaDestino)) {
-							Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
-							conta.transferir(valor, contaRecebe);
-						} else {
-							System.out.println("O número da conta não existe");
-						}
-						break;
-					case 4:
-						conta.emitirExtrato();
-						break;
-					case 5:
-						valor = 0;
-						voltar = true;	
-						
-						break;
-					default:
-						System.out.println("Opção inválida !!");
-						break;
-					}
-					
-					
-					}while (voltar == false );
-					
-					
-				break;	
-				}
-				else {
-					System.out.println("Cliente não possui Conta Corrente !!");
-					break;
-		
-					
-				}	
+				menuOperacoesDaContaCorrente(cliente);
+				break;
 				
 			
 			case 2:
-				
-					if (Maps.mapCpfContaPoupanca.containsKey(cliente.getCpf())) {
-
-						Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());
-
-						System.out.println("Bem vindo a Conta Poupança");
-						System.out.println("===============");
-						System.out.println("1 - Saque");
-						System.out.println("2 - Deposito");
-						System.out.println("3 - Transferir");
-						System.out.println("4 - Extrato");
-						System.out.println("5 - Simulação de rendimento");
-						System.out.println("6 - Sair");
-						System.out.println("===============");
-
-						opcao = ler.nextInt();
-						double valor;
-
-						switch (opcao) {
-						case 1:
-							System.out.println("Digite o valor para sacar: ");
-							valor = ler.nextDouble();
-							conta.sacar(valor);
-							break;
-						case 2:
-							System.out.println("Digite o valor para depositar: ");
-							valor = ler.nextDouble();
-							conta.depositar(valor);
-							break;
-						case 3:
-							System.out.println("Digite o valor para transferir: ");
-							valor = ler.nextDouble();
-							System.out.println("Informe o número da conta destino: ");
-							int contaDestino = ler.nextInt();
-							if (Maps.mapNumeroConta.containsKey(contaDestino)) {
-								Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
-								conta.transferir(valor, contaRecebe);
-							} else {
-								System.out.println("O número da conta não existe");
-							}
-							break;
-						case 4:
-							conta.emitirExtrato();
-							break;
-						case 5:
-							System.out.println("Digite o valor para simular: ");
-							valor = ler.nextDouble();
-							System.out.println("Informe quantos dias deseja simular: ");
-							int dias;
-							dias = ler.nextInt();
-							((ContaPoupanca) conta).simular(valor, dias);
-							break;
-						case 6:
-							System.exit(0);
-							break;
-						default:
-							System.out.println("Opção inválida !!");
-							break;
-						}
-						break;
-					} else {
-						System.out.println("Cliente não possui Conta Poupança !!");
-						break;
-					}
+				menuOperacoesDaContaPoupanca(cliente);
+				break;
+			
+			case 3: 
+				System.exit(0);
+				break;
+					
 				}
-			} while (opcao != 5);
+			} while (true);
 		}
+		public static void menuOperacoesDaContaCorrente(Pessoa cliente) {
+			if (Maps.mapCpfContaCorrente.containsKey(cliente.getCpf())) {
+			
+				int opcaoCc;
+				do {
+					
+				Conta conta = Maps.mapCpfContaCorrente.get(cliente.getCpf());
 
+				System.out.println("Bem vindo a Conta Corrente");
+				System.out.println("===============");
+				System.out.println("1 - Saque");
+				System.out.println("2 - Deposito");
+				System.out.println("3 - Transferir");
+				System.out.println("4 - Extrato");
+				System.out.println("5 - Sair");
+				System.out.println("===============");
+
+				opcaoCc = ler.nextInt();
+				double valor;
+
+				switch (opcaoCc) {
+				case 1:
+					System.out.println("Digite o valor para sacar: ");
+					valor = ler.nextDouble();
+					conta.sacar(valor);
+					break;
+				case 2:
+					System.out.println("Digite o valor para depositar: ");
+					valor = ler.nextDouble();
+					conta.depositar(valor);
+					break;
+				case 3:
+					System.out.println("Digite o valor para transferir: ");
+					valor = ler.nextDouble();
+					System.out.println("Informe o número da conta destino: ");
+					int contaDestino = ler.nextInt();
+					if (Maps.mapNumeroConta.containsKey(contaDestino)) {
+						Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
+						conta.transferir(valor, contaRecebe);
+					} else {
+						System.out.println("O número da conta não existe");
+					}
+					break;
+				case 4:
+					conta.emitirExtrato();
+					break;
+				case 5:
+						
+					break;
+				default:
+					System.out.println("Opção inválida !!");
+					break;
+				}
+				
+				
+				}while (opcaoCc != 5 );
+				
+				
+			
+			}
+			else {
+				System.out.println("Cliente não possui Conta Corrente !!");
+				
+	
+				
+			}	
+		}
+		
+		public static void menuOperacoesDaContaPoupanca(Pessoa cliente) {
+			if (Maps.mapCpfContaPoupanca.containsKey(cliente.getCpf())) {
+				int opcaoPp;
+				Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());
+
+				System.out.println("Bem vindo a Conta Poupança");
+				System.out.println("===============");
+				System.out.println("1 - Saque");
+				System.out.println("2 - Deposito");
+				System.out.println("3 - Transferir");
+				System.out.println("4 - Extrato");
+				System.out.println("5 - Simulação de rendimento");
+				System.out.println("6 - Sair");
+				System.out.println("===============");
+				
+				opcaoPp = ler.nextInt();
+				double valor;
+
+				switch (opcaoPp) {
+				case 1:
+					System.out.println("Digite o valor para sacar: ");
+					valor = ler.nextDouble();
+					conta.sacar(valor);
+					break;
+				case 2:
+					System.out.println("Digite o valor para depositar: ");
+					valor = ler.nextDouble();
+					conta.depositar(valor);
+					break;
+				case 3:
+					System.out.println("Digite o valor para transferir: ");
+					valor = ler.nextDouble();
+					System.out.println("Informe o número da conta destino: ");
+					int contaDestino = ler.nextInt();
+					if (Maps.mapNumeroConta.containsKey(contaDestino)) {
+						Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
+						conta.transferir(valor, contaRecebe);
+					} else {
+						System.out.println("O número da conta não existe");
+					}
+					break;
+				case 4:
+					conta.emitirExtrato();
+					break;
+				case 5:
+					System.out.println("Digite o valor para simular: ");
+					valor = ler.nextDouble();
+					System.out.println("Informe quantos dias deseja simular: ");
+					int dias;
+					dias = ler.nextInt();
+					((ContaPoupanca) conta).simular(valor, dias);
+					break;
+				case 6:
+					
+					break;
+				default:
+					System.out.println("Opção inválida !!");
+					break;
+				}
+				
+				while(opcaoPp != 6);
+					
+				
+			} else {
+				System.out.println("Cliente não possui Conta Poupança !!");
+				
+			}
+		}
 	}
+		
 
