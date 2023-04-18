@@ -13,16 +13,16 @@ public abstract class Funcionario extends Pessoa {
 		super(nome, cpf, senha, tipo);
 	}
 //=====================================================================================
-public boolean cadastraCliente(String nome, String CPF, String senha) {
+public Pessoa cadastraCliente(String nome, String CPF, String senha) {
 		
 		if(!Maps.mapCpfPessoa.containsKey(CPF)) {
 			
 			Pessoa pessoa = new Cliente(nome, CPF, senha);
 			Listas.pessoa.add(pessoa);
 			Maps.mapCpfPessoa.put(CPF, pessoa);
-			return true;
+			return pessoa ;
 		}
-		return false;
+		return null;
 	}
 //=====================================================================================================
 	public Conta criarContaCorrente(int numeroAgencia, String CPF) {

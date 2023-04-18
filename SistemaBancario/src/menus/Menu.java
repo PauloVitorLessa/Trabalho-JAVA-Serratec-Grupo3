@@ -37,7 +37,7 @@ public class Menu {
 				if(Maps.mapCpfPessoa.get(CPF).getSenha().equals(senha)){
 					
 					login = true;
-					ler.close();
+					
 					
 					switch (Maps.mapCpfPessoa.get(CPF).getTipo()) {
 					case CLIENTE :				
@@ -87,9 +87,12 @@ public class Menu {
 		System.out.println("===============");
 		
 		opcao = ler.nextInt();
+		while(opcao !=5) {
 		switch(opcao) {
+		
+		 	
 		case 1:
-			do{
+		
 				if(Maps.mapCpfContaCorrente.containsKey(cliente.getCpf())) {
 				
 				Conta conta = Maps.mapCpfContaCorrente.get(cliente.getCpf());
@@ -141,9 +144,11 @@ public class Menu {
 				}
 			}else {
 				System.out.println("Cliente não possui Conta Corrente !!");
+				
+				
 			}
-			
-		}while(opcao !=5);	
+				
+		
 		
 		case 2:
 			do{
@@ -211,4 +216,7 @@ public class Menu {
 		}while(opcao !=5);	
 		}
 	}
+	
+	}
+	
 }

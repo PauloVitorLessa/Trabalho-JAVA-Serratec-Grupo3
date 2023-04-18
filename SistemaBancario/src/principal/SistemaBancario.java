@@ -2,6 +2,7 @@ package principal;
 
 import agencias.Agencia;
 import contas.Conta;
+import listas.Listas;
 import maps.Maps;
 import menus.Menu;
 import pessoas.*;
@@ -19,7 +20,10 @@ public class SistemaBancario {
 		Maps.mapCpfPessoa.put("123456789", gerente);
 		Maps.mapAgenciaGerente.put(agencia1.getNumeroAgencia(), gerente.getCpf());
 		
-		((Gerente)gerente).cadastraCliente("paulo", "145", "123");
+		
+		Pessoa cliente =((Gerente)gerente).cadastraCliente("paulo", "145", "123");
+		Maps.mapCpfPessoa.put(cliente.getCpf(), cliente);
+		Listas.pessoa.add(cliente);
 		
 		Pessoa diretor = new Diretor("yago", "123", "123");
 		Maps.mapCpfPessoa.put("123", diretor);
