@@ -34,11 +34,14 @@ public class SistemaBancario {
 		
 		
 		Conta corrente = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), diretor.getCpf());
-		corrente.depositar(10);
+		
 			
 		Conta c1 = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), cliente.getCpf());
 		Maps.mapCpfContaCorrente.put(cliente.getCpf(), c1);
 		
+		Conta Poupanca =  ((Gerente)gerente).criarContaPoupanca(agencia1.getNumeroAgencia(), cliente.getCpf());
+        
+        Maps.mapCpfContaPoupanca.put(cliente.getCpf(), Poupanca);
 		
 		
 		

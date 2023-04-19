@@ -7,6 +7,7 @@ import Movimentos.Movimentacao;
 import agencias.Agencia;
 import entradasEsaidas.Escreve;
 import enuns.ContaEnum;
+import enuns.MovimentosEnum;
 import listas.Listas;
 import pessoas.Pessoa;
 import utilidades.Arred;
@@ -14,7 +15,7 @@ import utilidades.Data;
 
 public class ContaPoupanca extends Conta{
 	
-	private double rendimento = 0.022;
+	private double rendimento = 0.00017;
 	
 	public ContaPoupanca(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
@@ -24,6 +25,8 @@ public class ContaPoupanca extends Conta{
 			this.setSaldo(this.getSaldo() - valor);
 			System.out.println("Seu saque foi efetuado! ");
 			System.out.println("O seu saldo é de: R$"+this.getSaldo());
+			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.SAQUE, valor, 0);
+			Listas.movimentacao.add(movimento);
 			return true;
 		}else {
 			System.out.println("O saque não pode ser realizado!");
@@ -32,7 +35,9 @@ public class ContaPoupanca extends Conta{
 	}
 	public boolean depositar(double valor) {
 		if(valor > 0) {
-			this.setSaldo(this.getSaldo()+valor);			
+			this.setSaldo(this.getSaldo()+valor);
+			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.DEPOSITO, valor, 0);
+			Listas.movimentacao.add(movimento);
 			return true;
 		}else {
 			System.out.println("Não foi possível realizar o depósito!");
@@ -46,6 +51,8 @@ public class ContaPoupanca extends Conta{
 				setSaldo(getSaldo() - valor);
 				contaDestino.depositar(valor);
 				System.out.println("Transferência concluída!");
+				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
+				Listas.movimentacao.add(movimento);
 				return true;
 			}
 			else {
@@ -77,7 +84,7 @@ public class ContaPoupanca extends Conta{
 				switch (movimentacao.getTipo()) {
 				case TRANSFERENCIA:					
 					System.out.println(movimentacao.getTipo() +"  -" +
-							           movimentacao.getValor() + "       " +
+							           movimentacao.getValor() + "              " +
 							           movimentacao.getNumeroContaDestino() + "         " + 
 							           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
@@ -86,7 +93,7 @@ public class ContaPoupanca extends Conta{
 					
 				case SAQUE:					
 					System.out.println(movimentacao.getTipo() +"          -" +
-					           movimentacao.getValor() + "       " +
+					           movimentacao.getValor() + "                      " +
 					           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
 					totalValor -= movimentacao.getValor();					
@@ -94,7 +101,7 @@ public class ContaPoupanca extends Conta{
 					
 				case DEPOSITO:					
 					System.out.println(movimentacao.getTipo() +"       +" +
-					           movimentacao.getValor() + "       " +
+					           movimentacao.getValor() + "                      " +
 					           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
 					totalValor += movimentacao.getValor();					
@@ -117,7 +124,7 @@ public class ContaPoupanca extends Conta{
 		Double montante;
 	    int tempo = dias;
 	    montante = capital * Math.pow(1 + this.rendimento, tempo); 
-	    System.out.println("Total Simulado em " + dias + " dias de : " + montante);
+	    System.out.println("Total Simulado em " + dias + " dias de : " + Arred.dois(montante, 2));
 	    
 	}
 }

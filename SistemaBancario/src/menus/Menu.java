@@ -203,7 +203,10 @@ public class Menu {
 		public static void menuOperacoesDaContaPoupanca(Pessoa cliente) {
 			if (Maps.mapCpfContaPoupanca.containsKey(cliente.getCpf())) {
 				int opcaoPp;
-				Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());
+				
+				do {				
+				
+				Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());				
 
 				System.out.println("Bem vindo a Conta Poupança");
 				System.out.println("==========================");
@@ -264,7 +267,7 @@ public class Menu {
 					break;
 				}
 				
-				while(opcaoPp != 6);
+				}while(opcaoPp != 6);
 					
 				
 			} else {
