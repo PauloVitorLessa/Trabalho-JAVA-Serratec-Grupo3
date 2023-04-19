@@ -24,7 +24,7 @@ public class Menu {
 			System.out.println("*****************************");
 			System.out.println("*****************************");
 			System.out.println();
-			System.out.println("Login:");
+			System.out.println("            LOGIN       ");
 			System.out.println();
 			System.out.println("Digite o CPF:");
 			CPF = ler.nextLine();
