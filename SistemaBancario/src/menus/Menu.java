@@ -6,6 +6,7 @@ import contas.Conta;
 import contas.ContaPoupanca;
 import maps.Maps;
 import pessoas.Pessoa;
+import relatorios.Relatorio;
 
 public class Menu {
 	static Scanner ler = new Scanner(System.in);
@@ -120,7 +121,9 @@ public class Menu {
 				System.out.println("2 - Deposito");
 				System.out.println("3 - Transferir");
 				System.out.println("4 - Extrato");
-				System.out.println("5 - Sair");
+				System.out.println("5 - Relatorio de Tributação");
+				System.out.println("6 - Saldo");
+				System.out.println("7 - Sair");
 				System.out.println("===============");
 
 				opcaoCc = ler.nextInt();
@@ -153,7 +156,15 @@ public class Menu {
 					conta.emitirExtrato();
 					break;
 				case 5:
+					Relatorio.relTributacao(conta);
 						
+					break;
+				case 6:
+					Relatorio.relSaldo(conta);
+					
+					break;
+				case 7:
+					
 					break;
 				default:
 					System.out.println("Opção inválida !!");
@@ -161,7 +172,7 @@ public class Menu {
 				}
 				
 				
-				}while (opcaoCc != 5 );
+				}while (opcaoCc != 7 );
 				
 				
 			

@@ -11,9 +11,10 @@ import pessoas.Pessoa;
 
 public class ContaCorrente extends Conta{
 	
-	private double tributoSaque = 0.1;
-	private double tributoDeposito = 0.1;
-	private double tributoTransferencia = 0.2;
+	private double tributoSaque = 0.10;
+	private double tributoDeposito = 0.10;
+	private double tributoTransferencia = 0.20;
+
 	
 	public ContaCorrente(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.CORRENTE);

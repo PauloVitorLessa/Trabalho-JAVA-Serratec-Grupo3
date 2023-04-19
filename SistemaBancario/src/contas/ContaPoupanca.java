@@ -82,7 +82,7 @@ public class ContaPoupanca extends Conta{
 			}
 		}
 	}
-	public void simular(Double valor, int dias) {
+	public void simular(double valor, int dias) {
 		Double capital = valor;
 		Double montante;
 	    int tempo = dias;
