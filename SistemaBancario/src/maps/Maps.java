@@ -17,4 +17,6 @@ public class Maps {
 	public static Map<Integer, String> mapAgenciaGerente = new HashMap<>();
 	public static Map<String, Conta> mapCpfContaCorrente = new HashMap<>();
 	public static Map<String, Conta> mapCpfContaPoupanca = new HashMap<>();
+	public static Map<String, Agencia> mapCpfAgencia = new HashMap<>();
+	
 }

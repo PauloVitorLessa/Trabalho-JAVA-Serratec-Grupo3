@@ -1,33 +1,25 @@
 package agencias;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import contas.Conta;
 import enuns.AgenciaEnum;
-import pessoas.Gerente;
 
 public class Agencia {
 	
 	private int numeroAgencia;
-	private Gerente gerente;
-	private List<Conta> contas = new ArrayList<>();
+	private String gerente;
+	private int contas=0;
 	private static int contador = 0;
 	private AgenciaEnum tipo = AgenciaEnum.AGENCIA;
 	
-	public Agencia(Gerente gerente, List<Conta> contas) {
-		this.gerente = gerente;
-		this.contas = contas;
-		contador++;
-	}
+	
 	public Agencia() {
 		contador++;
 		this.numeroAgencia = contador;
 	}
 	public AgenciaEnum getTipo() {
+		
 		return tipo;
 	}
-	public Agencia(Gerente gerente) {
+	public Agencia(String gerente) {
 		this.gerente = gerente;
 		contador++;
 		this.numeroAgencia = contador;
@@ -35,17 +27,24 @@ public class Agencia {
 	public int getNumeroAgencia() {
 		return numeroAgencia;
 	}
-	public Gerente getGerente() {
+	public String getGerente() {
 		return gerente;
 	}
-	public void setGerente(Gerente gerente) {
+	public void setGerente(String gerente) {
 		this.gerente = gerente;
 	}
-	public List<Conta> getContas() {
+	
+	public void addConta() {
+		this.contas += 1;
+		
+	}
+	public int getContas() {
 		return contas;
 	}
-	public void addConta(Conta conta){
-		this.contas.add(conta);
+	public void setContas(int contas) {
+		this.contas = contas;
 	}
+		
+		
 	
 }

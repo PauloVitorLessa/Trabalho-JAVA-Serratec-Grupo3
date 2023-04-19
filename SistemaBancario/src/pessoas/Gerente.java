@@ -12,7 +12,7 @@ public class Gerente extends Funcionario{
 	}
 	
 	public int getContasAgencia() {
-		return this.agencia.getContas().size();
+		return this.agencia.getContas();
 	}
 	
 }

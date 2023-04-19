@@ -6,7 +6,6 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 import Movimentos.Movimentacao;
-import agencias.Agencia;
 import listas.Listas;
 import utilidades.Arred;
 import utilidades.Data;
@@ -138,7 +137,7 @@ public static void extratoPoupanca(int numConta, String titular, double saldo) {
 		}		
 	}
 
-	public static void salvaRegistros() {
+	/*public static void salvaRegistros() {
 		
 		try {
 			String path = ".\\arquivos\\Objetos.txt";
@@ -165,10 +164,10 @@ public static void extratoPoupanca(int numConta, String titular, double saldo) {
 		} catch(IOException e) {
 			
 			e.printStackTrace();
-		}
+		}*/
 		
 	}
 
 
 
-}
+

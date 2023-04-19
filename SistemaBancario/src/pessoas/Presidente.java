@@ -33,7 +33,7 @@ import maps.Maps;
 	public boolean criarAgencia(String CPF) {
 		
 		if(Maps.mapCpfGerente.containsKey(CPF)) {
-			Agencia agencia = new Agencia(Maps.mapCpfGerente.get(CPF));
+			Agencia agencia = new Agencia(CPF);
 			Listas.agencia.add(agencia);
 			Maps.mapNumeroAgencia.put(agencia.getNumeroAgencia(),agencia);
 			return true;

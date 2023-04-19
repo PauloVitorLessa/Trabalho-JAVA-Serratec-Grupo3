@@ -1,5 +1,9 @@
 package menus;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Scanner;
 
 import contas.Conta;
@@ -7,6 +11,8 @@ import contas.ContaPoupanca;
 import maps.Maps;
 import pessoas.Pessoa;
 import relatorios.Relatorio;
+import utilidades.Arred;
+import utilidades.Data;
 
 public class Menu {
 	public static Scanner ler = new Scanner(System.in);
@@ -37,7 +43,7 @@ public class Menu {
 				if (Maps.mapCpfPessoa.get(CPF).getSenha().equals(senha)) {
 					
 					System.out.println("\n============================");
-					System.out.println("Bem vinde, " + Maps.mapCpfPessoa.get(CPF).getNome()+"\n");
+					System.out.println("Bem vindo(a), " + Maps.mapCpfPessoa.get(CPF).getNome()+"\n");
 					login = true;
 
 					switch (Maps.mapCpfPessoa.get(CPF).getTipo()) {
@@ -47,9 +53,7 @@ public class Menu {
 						break;
 					case GERENTE:
 						System.out.println("GERENTE");
-						System.out.println("GERENTE LOGADO");
-						System.out.println("GERENTE LOGADO");
-						System.out.println("GERENTE LOGADO");
+						menuGerente(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case DIRETOR:
 						System.out.println("DIRETOR");
@@ -89,7 +93,7 @@ public class Menu {
 			System.out.println("============================");
 			System.out.println("1 - Conta Corrente");
 			System.out.println("2 - Conta Poupança");
-			System.out.println("3 - Conta sair");
+			System.out.println("3 - sair");
 			System.out.println("============================");
 
 			opcao = ler.nextInt();
@@ -275,6 +279,66 @@ public class Menu {
 				
 			}
 		}
-	}
+		public static void menuGerente(Pessoa gerente) {
+			int opcao;
+			opcao = 0;
+			do {
+
+				System.out.println("============================");
+				System.out.println("1 - Conta Corrente");
+				System.out.println("2 - Conta Poupança");
+				System.out.println("3 - Relatorio do número de contas gerenciadas");
+				System.out.println("4 - sair");
+				System.out.println("============================");
+
+				opcao = ler.nextInt();
+				switch (opcao) {
+
+				case 1:
+					
+					menuOperacoesDaContaCorrente(gerente);
+					break;
+					
+				
+				case 2:
+					menuOperacoesDaContaPoupanca(gerente);
+					break;
+					
+				case 3:
+					try {
+						System.out.println("O número total de contas desta agência é: " +
+					            Maps.mapCpfAgencia.get(gerente.getCpf()).getContas());
+			String data = Data.dataHora(new Date());
+			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
+			FileWriter fw = new FileWriter(path, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("O número total de contas desta agência é: " +
+		               Maps.mapCpfAgencia.get(gerente.getCpf()).getContas());
+			pw.println(data);
+			pw.println("-----------------------------------------------------------------------");
+			pw.flush();
+			pw.close();
+			fw.close();
+					} catch(IOException e) {
+						
+						e.printStackTrace();
+					}					
+					break;
+				
+				case 4:
+					System.out.println("Sistema Encerrado");
+					System.exit(0);
+					break;
+						
+					}
+				} while (true);
+			}
+			
+			
+}
+		
+
 		
 
