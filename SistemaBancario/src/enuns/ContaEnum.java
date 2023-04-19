@@ -1,4 +1,4 @@
-package contas;
+package enuns;
 
 public enum ContaEnum {
 	CORRENTE,

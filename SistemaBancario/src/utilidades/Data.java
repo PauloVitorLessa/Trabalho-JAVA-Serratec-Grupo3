@@ -13,5 +13,14 @@ public class Data {
 		return dataFormatada;
 		
 	}
+	public static String dataHoraSemEspaco(Date agora) {
+		String formato = "dd-MM-yyyy-HH-mm-ss";
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
+		String dataFormatada = sdf.format(agora);
+		
+		return dataFormatada;
+		
+	}
+	
 
 }

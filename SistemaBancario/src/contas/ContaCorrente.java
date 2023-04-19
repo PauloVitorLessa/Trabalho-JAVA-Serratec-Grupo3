@@ -5,6 +5,8 @@ import java.util.Date;
 
 import Movimentos.Movimentacao;
 import agencias.Agencia;
+import entradasEsaidas.Escreve;
+import enuns.ContaEnum;
 import enuns.MovimentosEnum;
 import listas.Listas;
 import pessoas.Pessoa;
@@ -48,12 +50,20 @@ public class ContaCorrente extends Conta{
 	@Override
 	public boolean transferir(double valor, Conta contaDestino) {
 		if(valor - tributoTransferencia > 0 && this.getSaldo()>=valor) {
-			setSaldo(getSaldo() - valor - tributoTransferencia);
-			contaDestino.depositar(valor);
-			System.out.println("Transferência concluída!");
-			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
-			Listas.movimentacao.add(movimento);
-			return true;
+			if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
+				setSaldo(getSaldo() - valor - tributoTransferencia);
+				contaDestino.depositar(valor);
+				System.out.println("Transferência concluída!");
+				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
+				Listas.movimentacao.add(movimento);
+				return true;
+			}
+			else {
+				System.out.println("Transferência não realizada.");
+				System.out.println("A conta de destino deve ser diferente da conta de origem.");
+				return false;
+			}
+			
 		}else {
 			System.out.println("Saldo insuficiente para fazer a transferência!!");
 			return false;
@@ -80,8 +90,8 @@ public class ContaCorrente extends Conta{
 				case TRANSFERENCIA:					
 					System.out.println(movimentacao.getTipo() +"  -" +
 							           movimentacao.getValor() + "       " +
-							           movimentacao.getTributo() + "           " +
-							           movimentacao.getNumeroContaDestino() + "         " + 
+							           movimentacao.getTributo() + "          " +
+							           movimentacao.getNumeroContaDestino() + "          " + 
 							           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
 					totalValor -= movimentacao.getValor();
@@ -115,8 +125,9 @@ public class ContaCorrente extends Conta{
 			}
 		}
 		System.out.println("-----------------------------------------------------------------------");
-		System.out.println("TOTAL:          " + Arred.dois(totalValor, 2)+
-				           "       "+ Arred.dois(totalTributo, 2));
+		System.out.println("TOTAL:       R$ " + Arred.dois(totalValor, 2)+
+				           "    R$ "+ Arred.dois(totalTributo, 2));
 		System.out.println("\n");
+		Escreve.extratoCorrente(this.getNumeroConta(), this.getPessoa().getNome(), this.getSaldo());
 	}	
 }

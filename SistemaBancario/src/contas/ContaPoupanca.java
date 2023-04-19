@@ -5,6 +5,8 @@ import java.util.Date;
 
 import Movimentos.Movimentacao;
 import agencias.Agencia;
+import entradasEsaidas.Escreve;
+import enuns.ContaEnum;
 import listas.Listas;
 import pessoas.Pessoa;
 import utilidades.Arred;
@@ -40,10 +42,18 @@ public class ContaPoupanca extends Conta{
 	@Override
 	public boolean transferir(double valor, Conta contaDestino) {
 		if(valor > 0 && this.getSaldo()>=valor) {
-			setSaldo(getSaldo() - valor);
-			contaDestino.depositar(valor);
-			System.out.println("Transferência concluída!");
-			return true;
+			if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
+				setSaldo(getSaldo() - valor);
+				contaDestino.depositar(valor);
+				System.out.println("Transferência concluída!");
+				return true;
+			}
+			else {
+				System.out.println("Transferência não realizada.");
+				System.out.println("A conta de destino deve ser diferente da conta de origem.");
+				return false;
+			}
+			
 		}else {
 			System.out.println("Saldo insuficiente para fazer a transferência!!");
 			return false;
@@ -57,11 +67,10 @@ public class ContaPoupanca extends Conta{
 		System.out.println("Data: " + sdf.format(date));
 		System.out.println("Saldo: R$ " + Arred.dois(this.getSaldo(), 2));
 		System.out.println("-----------------------------------------------------------------------");
-		System.out.println("  TIPO         VALOR     TRIBUTO    C. DESTINO     DATA");
+		System.out.println("  TIPO         VALOR         C. DESTINO     DATA");
 		System.out.println("-----------------------------------------------------------------------");
 		
-		double totalValor = 0;
-		double totalTributo = 0;
+		double totalValor = 0;		
 		
 		for(Movimentacao movimentacao : Listas.movimentacao) {
 			if(movimentacao.getConta() == this.getNumeroConta()) {
@@ -69,32 +78,26 @@ public class ContaPoupanca extends Conta{
 				case TRANSFERENCIA:					
 					System.out.println(movimentacao.getTipo() +"  -" +
 							           movimentacao.getValor() + "       " +
-							           movimentacao.getTributo() + "           " +
 							           movimentacao.getNumeroContaDestino() + "         " + 
 							           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
-					totalValor -= movimentacao.getValor();
-					totalTributo += movimentacao.getTributo();
+					totalValor -= movimentacao.getValor();					
 					break;
 					
 				case SAQUE:					
 					System.out.println(movimentacao.getTipo() +"          -" +
 					           movimentacao.getValor() + "       " +
-					           movimentacao.getTributo() + "                     " +					            
 					           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
-					totalValor -= movimentacao.getValor();
-					totalTributo += movimentacao.getTributo();
+					totalValor -= movimentacao.getValor();					
 					break;
 					
 				case DEPOSITO:					
 					System.out.println(movimentacao.getTipo() +"       +" +
 					           movimentacao.getValor() + "       " +
-					           movimentacao.getTributo() + "                     " +					           
 					           Data.dataHora(movimentacao.getDatahora()));					
 					System.out.println();
-					totalValor += movimentacao.getValor();
-					totalTributo += movimentacao.getTributo();
+					totalValor += movimentacao.getValor();					
 					break;
 
 				default:
@@ -104,9 +107,9 @@ public class ContaPoupanca extends Conta{
 			}
 		}
 		System.out.println("-----------------------------------------------------------------------");
-		System.out.println("TOTAL:          " + Arred.dois(totalValor, 2)+
-				           "       "+ Arred.dois(totalTributo, 2));
+		System.out.println("TOTAL:          " + Arred.dois(totalValor, 2));
 		System.out.println("\n");
+		Escreve.extratoPoupanca(this.getNumeroConta(), this.getPessoa().getNome(), this.getSaldo());
 	}
 	
 	public void simular(double valor, int dias) {

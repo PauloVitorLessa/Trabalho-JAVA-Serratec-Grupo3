@@ -1,6 +1,7 @@
 package contas;
 
 import agencias.Agencia;
+import enuns.ContaEnum;
 import interfaces.Operacoes;
 import pessoas.Pessoa;
 
