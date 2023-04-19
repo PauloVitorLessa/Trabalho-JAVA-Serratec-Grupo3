@@ -9,7 +9,7 @@ import pessoas.Pessoa;
 import relatorios.Relatorio;
 
 public class Menu {
-	static Scanner ler = new Scanner(System.in);
+	public static Scanner ler = new Scanner(System.in);
 
 	public static void menuLogin() {
 
@@ -30,30 +30,35 @@ public class Menu {
 			System.out.println("Digite o CPF:");
 			CPF = ler.nextLine();
 			System.out.println("Digite a senha:");
-			senha = ler.nextLine();
-			System.out.println("______________________________");
+			senha = ler.nextLine();			
 
 			if (Maps.mapCpfPessoa.containsKey(CPF)) {
 
 				if (Maps.mapCpfPessoa.get(CPF).getSenha().equals(senha)) {
-
+					
+					System.out.println("\n============================");
+					System.out.println("Bem vinde, " + Maps.mapCpfPessoa.get(CPF).getNome()+"\n");
 					login = true;
 
 					switch (Maps.mapCpfPessoa.get(CPF).getTipo()) {
 					case CLIENTE:
+						System.out.println("CLIENTE");
 						menuCliente(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case GERENTE:
+						System.out.println("GERENTE");
 						System.out.println("GERENTE LOGADO");
 						System.out.println("GERENTE LOGADO");
 						System.out.println("GERENTE LOGADO");
 						break;
 					case DIRETOR:
+						System.out.println("DIRETOR");
 						System.out.println("DIRETOR LOGADO");
 						System.out.println("DIRETOR LOGADO");
 						System.out.println("DIRETOR LOGADO");
 						break;
 					case PRESIDENTE:
+						System.out.println("PRESIDENTE");
 						System.out.println("PRESIDENTE LOGADO");
 						System.out.println("PRESIDENTE LOGADO");
 						System.out.println("PRESIDENTE LOGADO");
@@ -81,11 +86,11 @@ public class Menu {
 		opcao = 0;
 		do {
 
-			System.out.println("===============");
+			System.out.println("============================");
 			System.out.println("1 - Conta Corrente");
 			System.out.println("2 - Conta Poupança");
 			System.out.println("3 - Conta sair");
-			System.out.println("===============");
+			System.out.println("============================");
 
 			opcao = ler.nextInt();
 			switch (opcao) {
@@ -100,7 +105,8 @@ public class Menu {
 				menuOperacoesDaContaPoupanca(cliente);
 				break;
 			
-			case 3: 
+			case 3:
+				System.out.println("Sistema Encerrado");
 				System.exit(0);
 				break;
 					
@@ -116,15 +122,16 @@ public class Menu {
 				Conta conta = Maps.mapCpfContaCorrente.get(cliente.getCpf());
 
 				System.out.println("Bem vindo a Conta Corrente");
-				System.out.println("===============");
+				System.out.println("============================");
 				System.out.println("1 - Saque");
 				System.out.println("2 - Deposito");
 				System.out.println("3 - Transferir");
 				System.out.println("4 - Extrato");
 				System.out.println("5 - Relatorio de Tributação");
 				System.out.println("6 - Saldo");
-				System.out.println("7 - Sair");
-				System.out.println("===============");
+				System.out.println("7 - Voltar");
+				System.out.println("8 - Sair do Sistema");
+				System.out.println("============================");
 
 				opcaoCc = ler.nextInt();
 				double valor;
@@ -134,11 +141,14 @@ public class Menu {
 					System.out.println("Digite o valor para sacar: ");
 					valor = ler.nextDouble();
 					conta.sacar(valor);
+					System.out.println();
 					break;
 				case 2:
 					System.out.println("Digite o valor para depositar: ");
 					valor = ler.nextDouble();
-					conta.depositar(valor);
+					if(conta.depositar(valor)) {
+						System.out.println("Depósito efetuado!\n");
+					};
 					break;
 				case 3:
 					System.out.println("Digite o valor para transferir: ");
@@ -151,6 +161,7 @@ public class Menu {
 					} else {
 						System.out.println("O número da conta não existe");
 					}
+					System.out.println();
 					break;
 				case 4:
 					conta.emitirExtrato();
@@ -165,6 +176,10 @@ public class Menu {
 					break;
 				case 7:
 					
+					break;
+				case 8:
+					System.out.println("Sistema Encerrado");
+					System.exit(0);
 					break;
 				default:
 					System.out.println("Opção inválida !!");
@@ -191,14 +206,14 @@ public class Menu {
 				Conta conta = Maps.mapCpfContaPoupanca.get(cliente.getCpf());
 
 				System.out.println("Bem vindo a Conta Poupança");
-				System.out.println("===============");
+				System.out.println("==========================");
 				System.out.println("1 - Saque");
 				System.out.println("2 - Deposito");
 				System.out.println("3 - Transferir");
 				System.out.println("4 - Extrato");
 				System.out.println("5 - Simulação de rendimento");
 				System.out.println("6 - Sair");
-				System.out.println("===============");
+				System.out.println("===========================");
 				
 				opcaoPp = ler.nextInt();
 				double valor;
@@ -208,11 +223,14 @@ public class Menu {
 					System.out.println("Digite o valor para sacar: ");
 					valor = ler.nextDouble();
 					conta.sacar(valor);
+					System.out.println();
 					break;
 				case 2:
 					System.out.println("Digite o valor para depositar: ");
 					valor = ler.nextDouble();
-					conta.depositar(valor);
+					if(conta.depositar(valor)) {
+						System.out.println("Depósito efetuado!\n");
+					};
 					break;
 				case 3:
 					System.out.println("Digite o valor para transferir: ");
@@ -225,6 +243,7 @@ public class Menu {
 					} else {
 						System.out.println("O número da conta não existe");
 					}
+					System.out.println();
 					break;
 				case 4:
 					conta.emitirExtrato();

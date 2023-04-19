@@ -6,6 +6,7 @@ import listas.Listas;
 import maps.Maps;
 import menus.Menu;
 import pessoas.*;
+import utilidades.Arred;
 
 public class SistemaBancario {
 
@@ -33,12 +34,14 @@ public class SistemaBancario {
 		
 		
 		Conta corrente = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), diretor.getCpf());
-		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
 		corrente.depositar(10);
-		System.out.println(corrente.getNumeroConta() + " / " + corrente.getSaldo());
-		
+			
 		Conta c1 = ((Gerente)gerente).criarContaCorrente(agencia1.getNumeroAgencia(), cliente.getCpf());
 		Maps.mapCpfContaCorrente.put(cliente.getCpf(), c1);
+		
+		
+		
+		
 		
 		
 		Menu.menuLogin();

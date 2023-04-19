@@ -1,7 +1,6 @@
 package Movimentos;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Date;
 
 import enuns.MovimentosEnum;
 
@@ -12,14 +11,14 @@ public class Movimentacao {
 	private MovimentosEnum tipo;
 	private double valor;
 	private double tributo;
-	private LocalDateTime datahora;
+	private Date datahora;
 	
 public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double tributo) {
 	this.numeroConta = numeroConta;
 	this.tipo = tipo;
 	this.valor = valor;
 	this.tributo = tributo;
-	this.datahora = LocalDateTime.now();
+	this.datahora = new Date();
 	}
 public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double tributo, int numeroContaDestino) {
 	this.numeroConta = numeroConta;
@@ -27,7 +26,7 @@ public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double t
 	this.tipo = tipo;
 	this.valor = valor;
 	this.tributo = tributo;
-	this.datahora = LocalDateTime.now();
+	this.datahora = new Date();
 	}
 
 public int getConta() {
@@ -46,7 +45,7 @@ public double getTributo() {
 	return tributo;
 }
 
-public LocalDateTime getDatahora() {
+public Date getDatahora() {
 	return datahora;
 }
 public int getNumeroContaDestino() {
