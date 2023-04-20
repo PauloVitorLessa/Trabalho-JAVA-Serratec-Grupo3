@@ -7,12 +7,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
-
 import agencias.Agencia;
 import contas.Conta;
 import contas.ContaPoupanca;
@@ -63,6 +61,7 @@ public class Menu {
 						menuGerente(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case DIRETOR:
+						System.out.println("DIRETOR");
 						menuDiretor(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case PRESIDENTE:
@@ -382,37 +381,23 @@ public class Menu {
 						@Override
 						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
 							
-							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o1.getKey()).getNome());
+							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
 						}
 						
-					});
-																
+					});	
 					
-					Map<String,Agencia> mapOrdenado = new LinkedHashMap<String, Agencia>();
 
 				    for(Map.Entry<String, Agencia> valor: lista){
-				        mapOrdenado.put(valor.getKey(), valor.getValue());
+				    	
+				    	System.out.println("     "+valor.getValue().getNumeroAgencia() +
+				    			           "        "+valor.getKey()+ "    " +
+				    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());
+				       
 				    }			    
 					
 				    
-					for(Map <String, Agencia> valor : mapOrdenado) {
-						
-						//System.out.println(Maps.mapCpfPessoa.get(valor.getKey()).getNome());
-						
-					}
 					
 					
-					
-					
-					
-					
-					
-					for (String key : map.keySet()) {
-						
-						System.out.println("     "+map.get(key).getNumeroAgencia() + "        "+key + "    " + Maps.mapCpfPessoa.get(key).getNome());
-						
-						
-					}
 					try {
 						
 			
