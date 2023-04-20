@@ -278,8 +278,6 @@ public class Escreve {
 
 						break;
 
-					default:
-						break;
 //=====================================================					
 
 					case "SAQUE":
@@ -336,7 +334,8 @@ public class Escreve {
 						Listas.movimentacao.add(tranferencia);
 						break;
 //=====================================================					
-
+					default:
+						break;
 					}
 				}
 
