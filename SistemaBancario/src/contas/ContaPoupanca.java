@@ -21,48 +21,68 @@ public class ContaPoupanca extends Conta{
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
 	}
 	public boolean sacar(double valor) {
-		if(this.getSaldo() >= valor && valor > 0) {
-			this.setSaldo(this.getSaldo() - valor);
-			System.out.println("Seu saque foi efetuado! ");
-			System.out.println("O seu saldo é de: R$"+this.getSaldo());
-			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.SAQUE, valor, 0);
-			Listas.movimentacao.add(movimento);
-			return true;
+		if(valor > 0.009999999999999999999999999999999999999999999999999999) {
+			if(this.getSaldo() >= valor) {
+				this.setSaldo(this.getSaldo() - valor);
+				System.out.println("Seu saque foi efetuado! ");				
+				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.SAQUE, valor, 0);
+				Listas.movimentacao.add(movimento);
+				return true;
+			}else {
+				System.out.println("Saldo insuficinte para realizar o saque!");
+				return false;
+			}
 		}else {
-			System.out.println("O saque não pode ser realizado!");
+			System.out.println("Saque não realizado.");
+			System.out.println("O valor deve ser \n"
+					           + "maior ou igual a 1 centavo");
 			return false;
 		}
+		
 	}
 	public boolean depositar(double valor) {
-		if(valor > 0) {
+		if(valor > 0.00999999999999999999999999999999999999) {
 			this.setSaldo(this.getSaldo()+valor);
 			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.DEPOSITO, valor, 0);
 			Listas.movimentacao.add(movimento);
 			return true;
 		}else {
-			System.out.println("Não foi possível realizar o depósito!");
+			System.out.println("Deposito não realizado.");
+			System.out.println("O valor deve ser \n"
+					            + "maior ou igual a 1 centavo.");
 			return false;
 		}	
 	}
 	@Override
 	public boolean transferir(double valor, Conta contaDestino) {
-		if(valor > 0 && this.getSaldo()>=valor) {
-			if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
-				setSaldo(getSaldo() - valor);
-				contaDestino.depositar(valor);
-				System.out.println("Transferência concluída!");
-				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
-				Listas.movimentacao.add(movimento);
-				return true;
-			}
-			else {
+		if(valor > 0.0099999999999999999999999999999999999999999999) {
+			if(this.getSaldo()>=valor) {
+				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
+					setSaldo(getSaldo() - valor);
+					contaDestino.depositar(valor);
+					System.out.println("Transferência concluída!");
+					Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
+					Listas.movimentacao.add(movimento);
+					return true;
+				}
+				else {
+					System.out.println("Transferência não realizada.");
+					System.out.println("A conta de destino deve ser \n"
+							          + "diferente da conta de origem.");
+					return false;
+				}
+				
+			}else {
 				System.out.println("Transferência não realizada.");
-				System.out.println("A conta de destino deve ser diferente da conta de origem.");
+				System.out.println("Saldo insuficiente para fazer a transferência!");
 				return false;
+			
 			}
 			
 		}else {
-			System.out.println("Saldo insuficiente para fazer a transferência!!");
+			System.out.println("Transferência não realizada.");
+			System.out.println("O valor deve ser \n"
+					           + "maior ou igual a 1 centavo");
 			return false;
 		}
 	}

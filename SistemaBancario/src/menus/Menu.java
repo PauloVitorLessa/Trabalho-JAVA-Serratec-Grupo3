@@ -201,7 +201,7 @@ public class Menu {
 			
 			}
 			else {
-				System.out.println("Cliente não possui Conta Corrente !!");
+				System.out.println("Usuario não possui Conta Corrente !!");
 				
 	
 				
@@ -279,7 +279,7 @@ public class Menu {
 					
 				
 			} else {
-				System.out.println("Cliente não possui Conta Poupança !!");
+				System.out.println("Usuario não possui Conta Poupança !!");
 				
 			}
 		}
