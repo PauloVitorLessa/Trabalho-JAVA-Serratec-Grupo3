@@ -3,15 +3,22 @@ package menus;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
+import agencias.Agencia;
 import contas.Conta;
 import contas.ContaPoupanca;
 import maps.Maps;
 import pessoas.Pessoa;
 import relatorios.Relatorio;
-import utilidades.Arred;
 import utilidades.Data;
 
 public class Menu {
@@ -56,10 +63,7 @@ public class Menu {
 						menuGerente(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case DIRETOR:
-						System.out.println("DIRETOR");
-						System.out.println("DIRETOR LOGADO");
-						System.out.println("DIRETOR LOGADO");
-						System.out.println("DIRETOR LOGADO");
+						menuDiretor(Maps.mapCpfPessoa.get(CPF));
 						break;
 					case PRESIDENTE:
 						System.out.println("PRESIDENTE");
@@ -307,15 +311,15 @@ public class Menu {
 				case 3:
 					try {
 						System.out.println("O número total de contas desta agência é: " +
-					            Maps.mapCpfAgencia.get(gerente.getCpf()).getContas());
+					            Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
 			String data = Data.dataHora(new Date());
 			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
 			String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
 			FileWriter fw = new FileWriter(path, true);
 			PrintWriter pw = new PrintWriter(fw);
 			pw.println("-----------------------------------------------------------------------");
-			pw.println("O número total de contas desta agência é: " +
-		               Maps.mapCpfAgencia.get(gerente.getCpf()).getContas());
+			pw.println("O número total de contas gerenciadas é: " +
+		               Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
 			pw.println(data);
 			pw.println("-----------------------------------------------------------------------");
 			pw.flush();
@@ -335,6 +339,111 @@ public class Menu {
 					}
 				} while (true);
 			}
+		
+		public static void menuDiretor(Pessoa diretor) {
+			int opcao;
+			opcao = 0;
+			do {
+
+				System.out.println("============================");
+				System.out.println("1 - Conta Corrente");
+				System.out.println("2 - Conta Poupança");
+				System.out.println("3 - Relatorio de Clientes");
+				System.out.println("4 - sair");
+				System.out.println("============================");
+
+				opcao = ler.nextInt();
+				switch (opcao) {
+
+				case 1:
+					
+					menuOperacoesDaContaCorrente(diretor);
+					break;
+					
+				
+				case 2:
+					menuOperacoesDaContaPoupanca(diretor);
+					break;
+					
+				case 3:
+					
+					String data = Data.dataHora(new Date());
+					String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+					
+					System.out.println("RELATORIO DE CLIENTES\n");
+					System.out.println(data);					
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println("  AGÊNCIA     CPF    NOME    ");
+					System.out.println("-----------------------------------------------------------------------");
+					Map<String, Agencia> map = Maps.mapCpfPessoaAgencia;
+					List <Map.Entry<String, Agencia>> lista = new ArrayList<>(map.entrySet());
+					Collections.sort(lista, new Comparator<Map.Entry<String, Agencia>>(){
+
+						@Override
+						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
+							
+							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o1.getKey()).getNome());
+						}
+						
+					});
+																
+					
+					Map<String,Agencia> mapOrdenado = new LinkedHashMap<String, Agencia>();
+
+				    for(Map.Entry<String, Agencia> valor: lista){
+				        mapOrdenado.put(valor.getKey(), valor.getValue());
+				    }			    
+					
+				    
+					for(Map <String, Agencia> valor : mapOrdenado) {
+						
+						//System.out.println(Maps.mapCpfPessoa.get(valor.getKey()).getNome());
+						
+					}
+					
+					
+					
+					
+					
+					
+					
+					for (String key : map.keySet()) {
+						
+						System.out.println("     "+map.get(key).getNumeroAgencia() + "        "+key + "    " + Maps.mapCpfPessoa.get(key).getNome());
+						
+						
+					}
+					try {
+						
+			
+			String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
+			FileWriter fw = new FileWriter(path, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("O número total de contas gerenciadas é: " +
+		               Maps.mapCpfGerenteAgencia.get(diretor.getCpf()).getContas());
+			pw.println(data);
+			pw.println("-----------------------------------------------------------------------");
+			pw.flush();
+			pw.close();
+			fw.close();
+					} catch(IOException e) {
+						
+						e.printStackTrace();
+					}					
+					break;
+				
+				case 4:
+					System.out.println("Sistema Encerrado");
+					System.exit(0);
+					break;
+						
+					}
+				} while (true);
+			}
+		
+		
+		
 			
 			
 }

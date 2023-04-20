@@ -20,7 +20,7 @@ public class SistemaBancario {
 		Pessoa gerente = new Gerente("caio", "000", "000",agencia1);
 		Maps.mapCpfPessoa.put("000", gerente);
 		Maps.mapAgenciaGerente.put(agencia1.getNumeroAgencia(), gerente.getCpf());
-		Maps.mapCpfAgencia.put(gerente.getCpf(), agencia1);
+		Maps.mapCpfGerenteAgencia.put(gerente.getCpf(), agencia1);
 		
 		
 		Pessoa cliente =((Gerente)gerente).cadastraCliente("paulo", "145", "123");

@@ -13,6 +13,7 @@ public abstract class Conta implements Operacoes{
 	private Pessoa pessoa;
 	private ContaEnum tipo;
 	private static int contadorNumConta;
+	private double totalTributo=0;
 	
 	public Conta(Agencia agencia, Pessoa pessoa, ContaEnum tipo) {
 		
@@ -46,6 +47,9 @@ public abstract class Conta implements Operacoes{
 	}
 	public ContaEnum getTipo() {
 		return tipo;
+	}
+	public void setTotaltributo(double valor) {
+		this.totalTributo+=valor;
 	}
 	
 }

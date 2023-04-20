@@ -30,6 +30,7 @@ public class ContaCorrente extends Conta{
 			System.out.println("Seu saque foi efetuado! ");			
 			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.SAQUE, valor, tributoSaque);
 			Listas.movimentacao.add(movimento);
+			this.setTotaltributo(tributoSaque);
 			return true;
 		}else {
 			System.out.println("O saque não pode ser realizado!");
@@ -41,6 +42,7 @@ public class ContaCorrente extends Conta{
 			this.setSaldo(this.getSaldo()+valor - tributoDeposito);			
 			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.DEPOSITO, valor, tributoDeposito);
 			Listas.movimentacao.add(movimento);
+			this.setTotaltributo(tributoDeposito);
 			return true;
 		}else {
 			System.out.println("Não foi possível realizar o depósito!");
@@ -56,6 +58,7 @@ public class ContaCorrente extends Conta{
 				System.out.println("Transferência concluída!");
 				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
 				Listas.movimentacao.add(movimento);
+				this.setTotaltributo(tributoTransferencia);
 				return true;
 			}
 			else {

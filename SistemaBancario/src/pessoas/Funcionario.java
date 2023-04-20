@@ -34,6 +34,7 @@ public Pessoa cadastraCliente(String nome, String CPF, String senha) {
 				Maps.mapNumeroConta.put(contaCorrente.getNumeroConta(),contaCorrente);
 				Maps.mapCpfContaCorrente.put(CPF,contaCorrente);
 				Maps.mapNumeroAgencia.get(numeroAgencia).addConta();
+				Maps.mapCpfPessoaAgencia.put(CPF, Maps.mapNumeroAgencia.get(numeroAgencia));
 				return contaCorrente;	
 			}
 		}
@@ -48,6 +49,7 @@ public Pessoa cadastraCliente(String nome, String CPF, String senha) {
 				Maps.mapNumeroConta.put(contaPoupanca.getNumeroConta(),contaPoupanca);
 				Maps.mapCpfContaPoupanca.put(CPF,contaPoupanca);
 				Maps.mapNumeroAgencia.get(numeroAgencia).addConta();
+				Maps.mapCpfPessoaAgencia.put(CPF, Maps.mapNumeroAgencia.get(numeroAgencia));
 				return contaPoupanca;
 			}
 		}
