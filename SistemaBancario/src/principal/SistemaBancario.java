@@ -12,8 +12,14 @@ public class SistemaBancario {
 
 	public static void main(String[] args) {
 		
-		Pessoa presidente = new Presidente("Joãozinho","122","12354");
+		Pessoa presidente = new Presidente("Joãozinho","122","123");
 		Agencia agencia1 = ((Presidente)presidente).criarAgencia();
+		
+		Conta corrente1 = ((Presidente)presidente).criarContaCorrente(agencia1.getNumeroAgencia(), presidente.getCpf());
+		Maps.mapCpfContaCorrente.put(presidente.getCpf(), corrente1);
+		Listas.conta.add(corrente1);
+		Listas.pessoa.add(presidente);
+		
 		Maps.mapCpfPessoa.put("122",presidente);
 		Maps.mapNumeroAgencia.put(agencia1.getNumeroAgencia(),agencia1);
 		
@@ -43,8 +49,6 @@ public class SistemaBancario {
 		Conta Poupanca =  ((Gerente)gerente).criarContaPoupanca(agencia1.getNumeroAgencia(), cliente.getCpf());
         
         Maps.mapCpfContaPoupanca.put(cliente.getCpf(), Poupanca);
-		
-		
 		
 		
 		

@@ -13,7 +13,9 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import agencias.Agencia;
 import contas.Conta;
+import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import listas.Listas;
 import maps.Maps;
 import pessoas.Pessoa;
 import relatorios.Relatorio;
@@ -66,9 +68,7 @@ public class Menu {
 						break;
 					case PRESIDENTE:
 						System.out.println("PRESIDENTE");
-						System.out.println("PRESIDENTE LOGADO");
-						System.out.println("PRESIDENTE LOGADO");
-						System.out.println("PRESIDENTE LOGADO");
+						menuPresidente(Maps.mapCpfPessoa.get(CPF));
 						break;
 
 					default:
@@ -365,56 +365,7 @@ public class Menu {
 					break;
 					
 				case 3:
-					
-					String data = Data.dataHora(new Date());
-					String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
-					
-					System.out.println("RELATORIO DE CLIENTES\n");
-					System.out.println(data);					
-					System.out.println("-----------------------------------------------------------------------");
-					System.out.println("  AGÊNCIA     CPF    NOME    ");
-					System.out.println("-----------------------------------------------------------------------");
-					Map<String, Agencia> map = Maps.mapCpfPessoaAgencia;
-					List <Map.Entry<String, Agencia>> lista = new ArrayList<>(map.entrySet());
-					Collections.sort(lista, new Comparator<Map.Entry<String, Agencia>>(){
-
-						@Override
-						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
-							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
-						}
-						
-					});	
-
-				    for(Map.Entry<String, Agencia> valor: lista){
-				    	
-				    	System.out.println("     "+valor.getValue().getNumeroAgencia() +
-				    			           "        "+valor.getKey()+ "    " +
-				    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());    
-				    }			    	
-					
-					try {
-						
-						String path = ".\\arquivos\\Relatorio-diretor-"+dataSemEspaco+".txt";
-						FileWriter fw = new FileWriter(path, true);
-						PrintWriter pw = new PrintWriter(fw);
-						pw.println("-----------------------------------------------------------------------");
-						pw.println("O RELATORIO DE CLIENTES\n");
-						pw.println(data);
-						pw.println("-----------------------------------------------------------------------");
-						pw.println("  AGÊNCIA     CPF    NOME    ");
-						pw.println("-----------------------------------------------------------------------");
-						for(Map.Entry<String, Agencia> valor: lista) {
-						pw.println("     "+valor.getValue().getNumeroAgencia() +
-		    			           "        "+valor.getKey()+ "    " +
-		    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());
-						}
-						pw.flush();
-						pw.close();
-						fw.close();
-					} catch(IOException e) {
-						
-						e.printStackTrace();
-					}					
+					relatorioDiretor();			
 					break;
 				
 				case 4:
@@ -435,77 +386,30 @@ public class Menu {
 				System.out.println("1 - Conta Corrente");
 				System.out.println("2 - Conta Poupança");
 				System.out.println("3 - Relatorio de Clientes");
-				System.out.println("4 - sair");
+				System.out.println("4 - Relatorio valor armazenado");
+				System.out.println("5 - sair");
 				System.out.println("============================");
 
 				opcao = ler.nextInt();
 				switch (opcao) {
 
 				case 1:
-					
 					menuOperacoesDaContaCorrente(presidente);
 					break;
 					
-				
 				case 2:
 					menuOperacoesDaContaPoupanca(presidente);
 					break;
 					
 				case 3:
+					relatorioDiretor();
+					break;
 					
-					String data = Data.dataHora(new Date());
-					String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
-					
-					System.out.println("RELATORIO DE CLIENTES\n");
-					System.out.println(data);					
-					System.out.println("-----------------------------------------------------------------------");
-					System.out.println("  AGÊNCIA     CPF    NOME    ");
-					System.out.println("-----------------------------------------------------------------------");
-					Map<String, Agencia> map = Maps.mapCpfPessoaAgencia;
-					List <Map.Entry<String, Agencia>> lista = new ArrayList<>(map.entrySet());
-					Collections.sort(lista, new Comparator<Map.Entry<String, Agencia>>(){
-
-						@Override
-						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
-							
-							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
-						}
-						
-					});	
-					
-
-				    for(Map.Entry<String, Agencia> valor: lista){
-				    	
-				    	System.out.println("     "+valor.getValue().getNumeroAgencia() +
-				    			           "        "+valor.getKey()+ "    " +
-				    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());
-				       
-				    }			    
-					
-				    
-					
-					
-					try {
-						
-			
-			String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
-			FileWriter fw = new FileWriter(path, true);
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println("-----------------------------------------------------------------------");
-			pw.println("O número total de contas gerenciadas é: " +
-		               Maps.mapCpfGerenteAgencia.get(presidente.getCpf()).getContas());
-			pw.println(data);
-			pw.println("-----------------------------------------------------------------------");
-			pw.flush();
-			pw.close();
-			fw.close();
-					} catch(IOException e) {
-						
-						e.printStackTrace();
-					}					
+				case 4:
+					relatorioPresidente();
 					break;
 				
-				case 4:
+				case 5:
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -513,10 +417,83 @@ public class Menu {
 					}
 				} while (true);
 			}
+		public static void relatorioDiretor() {
+			String data = Data.dataHora(new Date());
+			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			
+			System.out.println("RELATORIO DE CLIENTES\n");
+			System.out.println(data);					
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("  AGÊNCIA     CPF    NOME    ");
+			System.out.println("-----------------------------------------------------------------------");
+			Map<String, Agencia> map = Maps.mapCpfPessoaAgencia;
+			List <Map.Entry<String, Agencia>> lista = new ArrayList<>(map.entrySet());
+			Collections.sort(lista, new Comparator<Map.Entry<String, Agencia>>(){
 
+				@Override
+				public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
+					return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
+				}
+				
+			});	
+
+		    for(Map.Entry<String, Agencia> valor: lista){
+		    	
+		    	System.out.println("     "+valor.getValue().getNumeroAgencia() +
+		    			           "        "+valor.getKey()+ "    " +
+		    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());    
+		    }			    	
+			
+			try {
+				
+				String path = ".\\arquivos\\Relatorio-diretor-"+dataSemEspaco+".txt";
+				FileWriter fw = new FileWriter(path, true);
+				PrintWriter pw = new PrintWriter(fw);
+				pw.println("-----------------------------------------------------------------------");
+				pw.println("O RELATORIO DE CLIENTES\n");
+				pw.println(data);
+				pw.println("-----------------------------------------------------------------------");
+				pw.println("  AGÊNCIA     CPF    NOME    ");
+				pw.println("-----------------------------------------------------------------------");
+				for(Map.Entry<String, Agencia> valor: lista) {
+				pw.println("     "+valor.getValue().getNumeroAgencia() +
+    			           "        "+valor.getKey()+ "    " +
+    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());
+				}
+				pw.flush();
+				pw.close();
+				fw.close();
+			} catch(IOException e) {
+				
+				e.printStackTrace();
+			}					
 		
+		}			
 			
+		public static void relatorioPresidente() {
+			double valorConta = 0.0;
+			double valorTributo = 0.0;
 			
+			for(Conta conta:Listas.conta) {
+				valorConta += conta.getSaldo();
+				valorTributo += conta.getTotalTributo();
+			}
+			String data = Data.dataHora(new Date());
+			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			
+			System.out.println("RELATORIO DE VALORES NO BANCO\n");
+			System.out.println(data);					
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("  VALOR CONTAS  ");
+			System.out.println(valorConta);
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("  VALOR TRIBUTO  ");
+			System.out.println(valorTributo);
+			System.out.println("-----------------------------------------------------------------------");
+			System.out.println("  VALOR LÍQUIDO  ");
+			System.out.println(valorConta + valorTributo);
+			
+		}
 }
 		
 

@@ -15,6 +15,9 @@ public abstract class Conta implements Operacoes{
 	private static int contadorNumConta;
 	private double totalTributo=0;
 	
+	public double getTotalTributo() {
+		return totalTributo;
+	}
 	public Conta(Agencia agencia, Pessoa pessoa, ContaEnum tipo) {
 		
 		this.agencia = agencia;
