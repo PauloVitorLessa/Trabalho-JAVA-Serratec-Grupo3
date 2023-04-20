@@ -19,6 +19,7 @@ import listas.Listas;
 import maps.Maps;
 import pessoas.Pessoa;
 import relatorios.Relatorio;
+import utilidades.Arred;
 import utilidades.Data;
 
 public class Menu {
@@ -485,13 +486,13 @@ public class Menu {
 			System.out.println(data);					
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("  VALOR CONTAS  ");
-			System.out.println(valorConta);
+			System.out.println(Arred.dois(valorConta, 2));
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("  VALOR TRIBUTO  ");
-			System.out.println(valorTributo);
+			System.out.println(Arred.dois(valorTributo, 2));
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("  VALOR LÍQUIDO  ");
-			System.out.println(valorConta + valorTributo);
+			System.out.println(Arred.dois(valorTributo+valorConta, 0));
 			
 		}
 }
