@@ -17,6 +17,11 @@ public class ContaPoupanca extends Conta{
 	
 	private double rendimento = 0.00017;
 	
+	
+	public ContaPoupanca(double saldo, Agencia agencia, Pessoa pessoa) {
+		super(saldo, agencia, pessoa, ContaEnum.POUPANCA, 0);
+		
+	}
 	public ContaPoupanca(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
 	}
@@ -59,7 +64,7 @@ public class ContaPoupanca extends Conta{
 			if(this.getSaldo()>=valor) {
 				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
 					setSaldo(getSaldo() - valor);
-					contaDestino.depositar(valor);
+					contaDestino.recebeTransferencia(valor);
 					System.out.println("Transferência concluída!");
 					Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
 					Listas.movimentacao.add(movimento);
@@ -86,6 +91,11 @@ public class ContaPoupanca extends Conta{
 			return false;
 		}
 	}
+	
+	public void recebeTransferencia(double valor) {
+		this.setSaldo(this.getSaldo()+valor);
+	}
+	
 	public void emitirExtrato() {
 		System.out.println("### Extrato da Conta Poupança ###\n");
 		System.out.println("Número da conta: " + this.getNumeroConta());

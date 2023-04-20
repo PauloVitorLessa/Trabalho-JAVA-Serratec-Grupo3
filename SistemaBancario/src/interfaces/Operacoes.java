@@ -7,4 +7,7 @@ public interface Operacoes {
 	public boolean depositar(double valor);
 	public boolean transferir(double valor, Conta contaDestino);
 	public void emitirExtrato();
+	public void recebeTransferencia(double valor); 
+		
+	
 }

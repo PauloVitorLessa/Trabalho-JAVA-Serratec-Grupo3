@@ -13,6 +13,18 @@ public class Movimentacao {
 	private double tributo;
 	private Date datahora;
 	
+	
+	
+public Movimentacao(int numeroConta, int numeroContaDestino, MovimentosEnum tipo, double valor, double tributo,
+			Date datahora) {
+		
+		this.numeroConta = numeroConta;
+		this.numeroContaDestino = numeroContaDestino;
+		this.tipo = tipo;
+		this.valor = valor;
+		this.tributo = tributo;
+		this.datahora = datahora;
+	}
 public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double tributo) {
 	this.numeroConta = numeroConta;
 	this.tipo = tipo;

@@ -14,5 +14,14 @@ public class Gerente extends Funcionario{
 	public int getContasAgencia() {
 		return this.agencia.getContas();
 	}
+
+	public Agencia getAgencia() {
+		return agencia;
+	}
+
+	public void setAgencia(Agencia agencia) {
+		this.agencia = agencia;
+	}
+	
 	
 }

@@ -18,6 +18,18 @@ public abstract class Conta implements Operacoes{
 	public double getTotalTributo() {
 		return totalTributo;
 	}
+	
+	
+	public Conta(double saldo, Agencia agencia, Pessoa pessoa, ContaEnum tipo, double totalTributo) {
+		super();
+		this.saldo = saldo;
+		this.agencia = agencia;
+		this.pessoa = pessoa;
+		this.tipo = tipo;
+		this.totalTributo = totalTributo;
+	}
+
+
 	public Conta(Agencia agencia, Pessoa pessoa, ContaEnum tipo) {
 		
 		this.agencia = agencia;

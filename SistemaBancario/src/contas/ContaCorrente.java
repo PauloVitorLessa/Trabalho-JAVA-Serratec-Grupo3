@@ -20,10 +20,18 @@ public class ContaCorrente extends Conta{
 	private double tributoTransferencia = 0.2;
 
 	
+	public ContaCorrente(double saldo, Agencia agencia, Pessoa pessoa, double totalTributo) {
+		super(saldo, agencia, pessoa, ContaEnum.CORRENTE, totalTributo);
+		
+	}
 	public ContaCorrente(Agencia agencia, Pessoa pessoa) {
 		super(agencia, pessoa, ContaEnum.CORRENTE);
 		
 	}
+	public double tributo() {
+		return this.tributoTransferencia;
+	}
+	
 	public boolean sacar(double valor) {
 		if(valor > 0.009999999999999999999999999999999999999999999999) {
 			if(this.getSaldo() >= (valor + tributoSaque)) {
@@ -42,7 +50,7 @@ public class ContaCorrente extends Conta{
 		}else {
 			System.out.println("Saque não realizado.");
 			System.out.println("O valor deve ser \n"
-					           + "maior do que 1 centavo");
+					           + "maior ou igual a 1 centavo");
 			return false;
 		}
 		
@@ -78,7 +86,7 @@ public class ContaCorrente extends Conta{
 			if(this.getSaldo() + tributoTransferencia >= valor) {
 				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
 					setSaldo(getSaldo() - valor - tributoTransferencia);
-					contaDestino.depositar(valor);
+					contaDestino.recebeTransferencia(valor);
 					System.out.println("Transferência concluída!");
 					Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
 					Listas.movimentacao.add(movimento);
@@ -108,6 +116,10 @@ public class ContaCorrente extends Conta{
 			return false;
 		}
 	}
+	public void recebeTransferencia(double valor) {
+		this.setSaldo(this.getSaldo()+valor);
+	}
+	
 	@Override
 	public void emitirExtrato() {
 		System.out.println("### Extrato da Conta Corrente ###\n");

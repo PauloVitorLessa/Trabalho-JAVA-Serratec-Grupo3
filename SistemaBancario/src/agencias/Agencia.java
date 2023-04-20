@@ -13,7 +13,7 @@ public class Agencia {
 	
 	public Agencia() {
 		contador++;
-		this.numeroAgencia = contador;
+		this.numeroAgencia = contador;		
 	}
 	public AgenciaEnum getTipo() {
 		
@@ -22,7 +22,15 @@ public class Agencia {
 	public Agencia(String gerente) {
 		this.gerente = gerente;
 		contador++;
-		this.numeroAgencia = contador;
+		this.numeroAgencia = contador;		
+	}
+	
+	public Agencia(String gerente, int contas) {
+		this.gerente = gerente;
+		this.contas = contas;
+		contador++;
+		this.numeroAgencia = contador;		
+		
 	}
 	public int getNumeroAgencia() {
 		return numeroAgencia;

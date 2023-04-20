@@ -6,7 +6,14 @@ import java.io.PrintWriter;
 import java.util.Date;
 
 import Movimentos.Movimentacao;
+import agencias.Agencia;
+import contas.Conta;
+import enuns.Cargo;
+import enuns.ContaEnum;
+import enuns.MovimentosEnum;
 import listas.Listas;
+import pessoas.Gerente;
+import pessoas.Pessoa;
 import utilidades.Arred;
 import utilidades.Data;
 
@@ -137,7 +144,7 @@ public static void extratoPoupanca(int numConta, String titular, double saldo) {
 		}		
 	}
 
-	/*public static void salvaRegistros() {
+	public static void salvaRegistros() {
 		
 		try {
 			String path = ".\\arquivos\\Objetos.txt";
@@ -146,17 +153,34 @@ public static void extratoPoupanca(int numConta, String titular, double saldo) {
 			
 			
 			for(Agencia agencia : Listas.agencia) {
-				if(agencia.getGerente() != null) {
-					if(agencia.getContas()!= null) {
-						pw.println(agencia.getTipo() + ";" +
-					               agencia.getGerente());
-					}
-				}
-				pw.println(agencia.getTipo() + ";" 
-			               );
+				pw.println(agencia.getTipo() + ";"+agencia.getGerente() +";"+agencia.getContas());
+			}
+			for(Pessoa pessoa : Listas.pessoa) {
+				if(pessoa.getTipo()==Cargo.GERENTE){
+					pw.println(pessoa.getTipo() +";"+pessoa.getNome()+";"+pessoa.getCpf()+
+							   ";"+pessoa.getSenha()+";"+((Gerente) pessoa).getAgencia().getGerente());
+				}else {
+					pw.println(pessoa.getTipo() +";"+pessoa.getNome()+";"+pessoa.getCpf()+
+							   ";"+pessoa.getSenha());
+				}				
+			}
+			for(Conta conta : Listas.conta) {
+				if(conta.getTipo()==ContaEnum.CORRENTE){
+					pw.println(conta.getTipo()+";"+conta.getSaldo() +";"+conta.getAgencia().getNumeroAgencia()+";"+
+				               conta.getPessoa().getCpf()+";"+conta.getTotalTributo());
+				}else {
+					pw.println(conta.getTipo()+";"+conta.getSaldo() +";"+conta.getAgencia().getNumeroAgencia()+";"+
+				               conta.getPessoa().getCpf());
+				}				
 			}
 			
+			for(Movimentacao movimento : Listas.movimentacao) {
 			
+					pw.println(movimento.getTipo()+";"+movimento.getConta()+";"+movimento.getNumeroContaDestino()+
+							   ";"+movimento.getValor()+";"+movimento.getTributo()+";"+movimento.getDatahora());
+				
+				
+			}	
 			
 			pw.flush();
 			pw.close();
@@ -164,9 +188,11 @@ public static void extratoPoupanca(int numConta, String titular, double saldo) {
 		} catch(IOException e) {
 			
 			e.printStackTrace();
-		}*/
+		}
 		
 	}
+	
+}
 
 
 

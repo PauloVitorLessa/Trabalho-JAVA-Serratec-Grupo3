@@ -15,6 +15,7 @@ import agencias.Agencia;
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
+import entradasEsaidas.Escreve;
 import listas.Listas;
 import maps.Maps;
 import pessoas.Pessoa;
@@ -411,6 +412,7 @@ public class Menu {
 					break;
 				
 				case 5:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
