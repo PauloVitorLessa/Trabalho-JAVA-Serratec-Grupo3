@@ -380,6 +380,93 @@ public class Menu {
 
 						@Override
 						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
+							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
+						}
+						
+					});	
+
+				    for(Map.Entry<String, Agencia> valor: lista){
+				    	
+				    	System.out.println("     "+valor.getValue().getNumeroAgencia() +
+				    			           "        "+valor.getKey()+ "    " +
+				    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());    
+				    }			    	
+					
+					try {
+						
+						String path = ".\\arquivos\\Relatorio-diretor-"+dataSemEspaco+".txt";
+						FileWriter fw = new FileWriter(path, true);
+						PrintWriter pw = new PrintWriter(fw);
+						pw.println("-----------------------------------------------------------------------");
+						pw.println("O RELATORIO DE CLIENTES\n");
+						pw.println(data);
+						pw.println("-----------------------------------------------------------------------");
+						pw.println("  AGÊNCIA     CPF    NOME    ");
+						pw.println("-----------------------------------------------------------------------");
+						for(Map.Entry<String, Agencia> valor: lista) {
+						pw.println("     "+valor.getValue().getNumeroAgencia() +
+		    			           "        "+valor.getKey()+ "    " +
+		    			           Maps.mapCpfPessoa.get(valor.getKey()).getNome());
+						}
+						pw.flush();
+						pw.close();
+						fw.close();
+					} catch(IOException e) {
+						
+						e.printStackTrace();
+					}					
+					break;
+				
+				case 4:
+					System.out.println("Sistema Encerrado");
+					System.exit(0);
+					break;
+						
+					}
+				} while (true);
+			}
+		
+		public static void menuPresidente(Pessoa presidente) {
+			int opcao;
+			opcao = 0;
+			do {
+
+				System.out.println("============================");
+				System.out.println("1 - Conta Corrente");
+				System.out.println("2 - Conta Poupança");
+				System.out.println("3 - Relatorio de Clientes");
+				System.out.println("4 - sair");
+				System.out.println("============================");
+
+				opcao = ler.nextInt();
+				switch (opcao) {
+
+				case 1:
+					
+					menuOperacoesDaContaCorrente(presidente);
+					break;
+					
+				
+				case 2:
+					menuOperacoesDaContaPoupanca(presidente);
+					break;
+					
+				case 3:
+					
+					String data = Data.dataHora(new Date());
+					String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+					
+					System.out.println("RELATORIO DE CLIENTES\n");
+					System.out.println(data);					
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println("  AGÊNCIA     CPF    NOME    ");
+					System.out.println("-----------------------------------------------------------------------");
+					Map<String, Agencia> map = Maps.mapCpfPessoaAgencia;
+					List <Map.Entry<String, Agencia>> lista = new ArrayList<>(map.entrySet());
+					Collections.sort(lista, new Comparator<Map.Entry<String, Agencia>>(){
+
+						@Override
+						public int compare(Entry<String, Agencia> o1, Entry<String, Agencia> o2) {
 							
 							return Maps.mapCpfPessoa.get(o1.getKey()).getNome().compareToIgnoreCase(Maps.mapCpfPessoa.get(o2.getKey()).getNome());
 						}
@@ -406,7 +493,7 @@ public class Menu {
 			PrintWriter pw = new PrintWriter(fw);
 			pw.println("-----------------------------------------------------------------------");
 			pw.println("O número total de contas gerenciadas é: " +
-		               Maps.mapCpfGerenteAgencia.get(diretor.getCpf()).getContas());
+		               Maps.mapCpfGerenteAgencia.get(presidente.getCpf()).getContas());
 			pw.println(data);
 			pw.println("-----------------------------------------------------------------------");
 			pw.flush();
@@ -426,8 +513,7 @@ public class Menu {
 					}
 				} while (true);
 			}
-		
-		
+
 		
 			
 			
