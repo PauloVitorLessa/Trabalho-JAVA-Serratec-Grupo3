@@ -28,7 +28,7 @@ import maps.Maps;
 		Agencia agencia = new Agencia();
 		Maps.mapNumeroAgencia.put(agencia.getNumeroAgencia(),agencia);
 		Listas.agencia.add(agencia);
-		return agencia;
+		return null;
 	}
 	public boolean criarAgencia(String CPF) {
 		

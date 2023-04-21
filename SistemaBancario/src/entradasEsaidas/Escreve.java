@@ -193,17 +193,19 @@ public class Escreve {
 
 	}
 
-	public static void Ler() {
+	public static void Ler() {		
 
 		String path = ".\\arquivos\\Objetos.txt";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+			String itens;
+			while(true){
+				itens = br.readLine();
+				if(itens != null) {
 
-			String Itens = br.readLine();
-			while (Itens != null) {
-
-				// instanciar produtos
-				String[] campos = Itens.split(";");
+//instancia Objetos
+					
+				String[] campos = itens.split(";");
 
 				for (String campo : campos) {
 
@@ -213,7 +215,7 @@ public class Escreve {
 
 						Pessoa p1 = new Presidente(campos[1], campos[2], campos[3]);
 						Listas.pessoa.add(p1);
-						Maps.mapCpfPessoa.put(campos[1], p1);
+						Maps.mapCpfPessoa.put(campos[2], p1);
 
 						break;
 
@@ -222,7 +224,7 @@ public class Escreve {
 
 						Agencia a1 = new Agencia(campos[1], Integer.parseInt(campos[2]));
 						Listas.agencia.add(a1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[1]), a1);
+						Maps.mapNumeroAgencia.put(a1.getNumeroAgencia(), a1);
 						break;
 
 //=======d==================================					
@@ -230,15 +232,16 @@ public class Escreve {
 
 						Pessoa d1 = new Diretor(campos[1], campos[2], campos[3]);
 						Listas.pessoa.add(d1);
-						Maps.mapCpfPessoa.put(campos[1], d1);
+						Maps.mapCpfPessoa.put(campos[2], d1);
 
 						break;
 //======g=======================================
 					case "GERENTE":
 
-						Pessoa g1 = new Gerente(campos[1], campos[2], campos[3], Maps.mapNumeroAgencia.get(campos[4]));
+						Pessoa g1 = new Gerente(campos[1], campos[2], campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
 						Listas.pessoa.add(g1);
-						Maps.mapCpfGerenteAgencia.put(campos[2], Maps.mapNumeroAgencia.get(campos[4]));
+						Maps.mapCpfPessoa.put(campos[2], g1);
+						Maps.mapCpfGerenteAgencia.put(campos[2], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
 						Maps.mapAgenciaGerente.put(Integer.parseInt(campos[4]), campos[2]);
 
 						break;
@@ -248,33 +251,33 @@ public class Escreve {
 
 						Pessoa c1 = new Cliente(campos[1], campos[2], campos[3]);
 						Listas.pessoa.add(c1);
-						Maps.mapCpfPessoa.put(campos[1], c1);
+						Maps.mapCpfPessoa.put(campos[2], c1);
 
 						break;
 //==============================================
 					case "CORRENTE":
 //lembrete
 						Conta cc1 = new ContaCorrente(Double.parseDouble(campos[1]),
-								Maps.mapNumeroAgencia.get(campos[2]), Maps.mapCpfPessoa.get(campos[3]),
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])), Maps.mapCpfPessoa.get(campos[3]),
 								Double.parseDouble(campos[4]));
 
 						Listas.conta.add(cc1);
 						Maps.mapNumeroConta.put(cc1.getNumeroConta(), cc1);
 						Maps.mapCpfContaCorrente.put(campos[3], cc1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(campos[2]));
-						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(campos[2]));
+						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
 //=============================================
 					case "POUPANCA":
 
 						Conta cp1 = new ContaPoupanca(Double.parseDouble(campos[1]),
-								Maps.mapNumeroAgencia.get(campos[2]), Maps.mapCpfPessoa.get(campos[3]));
-
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])), Maps.mapCpfPessoa.get(campos[3]));
+						Listas.conta.add(cp1);
 						Maps.mapNumeroConta.put(cp1.getNumeroConta(), cp1);
 						Maps.mapCpfContaCorrente.put(campos[3], cp1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(campos[2]));
-						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(campos[2]));
+						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
 
@@ -287,7 +290,6 @@ public class Escreve {
 						try {
 							date = dateFormat.parse(campos[6]);
 						} catch (ParseException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
@@ -339,13 +341,16 @@ public class Escreve {
 					}
 				}
 
+			}else {
+				break;
 			}
+		}
+
 		}
 
 		catch (IOException e) {
 			System.err.format("Erro de E/S: %s%n", e);
-		}
-
+	}
 	}
 
 }

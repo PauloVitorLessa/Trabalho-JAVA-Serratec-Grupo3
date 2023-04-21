@@ -21,12 +21,13 @@ public abstract class Conta implements Operacoes{
 	
 	
 	public Conta(double saldo, Agencia agencia, Pessoa pessoa, ContaEnum tipo, double totalTributo) {
-		super();
 		this.saldo = saldo;
 		this.agencia = agencia;
 		this.pessoa = pessoa;
 		this.tipo = tipo;
 		this.totalTributo = totalTributo;
+		contadorNumConta++;
+		this.numeroConta = contadorNumConta;
 	}
 
 
