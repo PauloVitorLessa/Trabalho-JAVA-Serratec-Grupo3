@@ -5,10 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import Movimentos.Movimentacao;
 import agencias.Agencia;
 import contas.Conta;

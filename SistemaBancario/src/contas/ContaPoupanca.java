@@ -11,7 +11,6 @@ import enuns.MovimentosEnum;
 import listas.Listas;
 import pessoas.Pessoa;
 import utilidades.Arred;
-import utilidades.Data;
 
 public class ContaPoupanca extends Conta{
 	
@@ -26,7 +25,7 @@ public class ContaPoupanca extends Conta{
 		super(agencia, pessoa, ContaEnum.POUPANCA);	
 	}
 	public boolean sacar(double valor) {
-		if(valor > 0.009999999999999999999999999999999999999999999999999999) {
+		if(valor >= 0.01) {
 			if(this.getSaldo() >= valor) {
 				this.setSaldo(this.getSaldo() - valor);
 				System.out.println("Seu saque foi efetuado! ");				
@@ -40,13 +39,13 @@ public class ContaPoupanca extends Conta{
 		}else {
 			System.out.println("Saque não realizado.");
 			System.out.println("O valor deve ser \n"
-					           + "maior ou igual a 1 centavo");
+					           + "maior ou igual a R$ 0,01");
 			return false;
 		}
 		
 	}
 	public boolean depositar(double valor) {
-		if(valor > 0.00999999999999999999999999999999999999) {
+		if(valor >= 0.01) {
 			this.setSaldo(this.getSaldo()+valor);
 			Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.DEPOSITO, valor, 0);
 			Listas.movimentacao.add(movimento);
@@ -54,13 +53,13 @@ public class ContaPoupanca extends Conta{
 		}else {
 			System.out.println("Deposito não realizado.");
 			System.out.println("O valor deve ser \n"
-					            + "maior ou igual a 1 centavo.");
+					            + "maior ou igual a R$ 0,01");
 			return false;
 		}	
 	}
 	@Override
 	public boolean transferir(double valor, Conta contaDestino) {
-		if(valor > 0.0099999999999999999999999999999999999999999999) {
+		if(valor >= 0.01) {
 			if(this.getSaldo()>=valor) {
 				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
 					setSaldo(getSaldo() - valor);
@@ -87,7 +86,7 @@ public class ContaPoupanca extends Conta{
 		}else {
 			System.out.println("Transferência não realizada.");
 			System.out.println("O valor deve ser \n"
-					           + "maior ou igual a 1 centavo");
+					           + "maior ou igual a R$ 0,01");
 			return false;
 		}
 	}

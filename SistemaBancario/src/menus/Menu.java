@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
+
 import agencias.Agencia;
 import contas.Conta;
-import contas.ContaCorrente;
 import contas.ContaPoupanca;
 import entradasEsaidas.Escreve;
 import listas.Listas;
@@ -115,6 +115,7 @@ public class Menu {
 				break;
 			
 			case 3:
+				Escreve.salvaRegistros();
 				System.out.println("Sistema Encerrado");
 				System.exit(0);
 				break;
@@ -187,6 +188,7 @@ public class Menu {
 					
 					break;
 				case 8:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -269,7 +271,9 @@ public class Menu {
 					((ContaPoupanca) conta).simular(valor, dias);
 					break;
 				case 6:
-					
+					Escreve.salvaRegistros();
+					System.out.println("Sistema Encerrado");
+					System.exit(0);					
 					break;
 				default:
 					System.out.println("Opção inválida !!");
@@ -333,6 +337,7 @@ public class Menu {
 					break;
 				
 				case 4:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -371,6 +376,7 @@ public class Menu {
 					break;
 				
 				case 4:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -481,8 +487,7 @@ public class Menu {
 				valorConta += conta.getSaldo();
 				valorTributo += conta.getTotalTributo();
 			}
-			String data = Data.dataHora(new Date());
-			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			String data = Data.dataHora(new Date());			
 			
 			System.out.println("RELATORIO DE VALORES NO BANCO\n");
 			System.out.println(data);					
