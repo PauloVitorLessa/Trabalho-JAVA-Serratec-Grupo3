@@ -2,7 +2,9 @@ package principal;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map.Entry;
 
+import agencias.Agencia;
 import entradasEsaidas.Escreve;
 import maps.Maps;
 import menus.Menu;
@@ -25,7 +27,10 @@ public class SistemaBancario {
 			
 		Escreve.Ler();
 		
-		System.out.println(Maps.mapNumeroAgencia.toString());
+		
+		//System.out.println(Maps.mapNumeroAgencia.toString());	
+System.out.println(Maps.mapCpfPessoaAgencia);
+		
 		
 		
 		Menu.menuLogin();

@@ -276,7 +276,7 @@ public class Escreve {
 								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])), Maps.mapCpfPessoa.get(campos[3]));
 						Listas.conta.add(cp1);
 						Maps.mapNumeroConta.put(cp1.getNumeroConta(), cp1);
-						Maps.mapCpfContaCorrente.put(campos[3], cp1);
+						Maps.mapCpfContaPoupanca.put(campos[3], cp1);
 						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
