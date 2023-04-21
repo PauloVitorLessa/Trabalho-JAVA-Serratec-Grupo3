@@ -116,7 +116,7 @@ public class ContaPoupanca extends Conta{
 					System.out.println(movimentacao.getTipo() +"  -" +
 							           movimentacao.getValor() + "              " +
 							           movimentacao.getNumeroContaDestino() + "         " + 
-							           Data.dataHora(movimentacao.getDatahora()));					
+							           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor -= movimentacao.getValor();					
 					break;
@@ -124,7 +124,7 @@ public class ContaPoupanca extends Conta{
 				case SAQUE:					
 					System.out.println(movimentacao.getTipo() +"          -" +
 					           movimentacao.getValor() + "                      " +
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor -= movimentacao.getValor();					
 					break;
@@ -132,7 +132,7 @@ public class ContaPoupanca extends Conta{
 				case DEPOSITO:					
 					System.out.println(movimentacao.getTipo() +"       +" +
 					           movimentacao.getValor() + "                      " +
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor += movimentacao.getValor();					
 					break;

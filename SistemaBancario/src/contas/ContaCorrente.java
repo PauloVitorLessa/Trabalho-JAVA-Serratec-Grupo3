@@ -143,7 +143,7 @@ public class ContaCorrente extends Conta{
 							           movimentacao.getValor() + "       " +
 							           movimentacao.getTributo() + "          " +
 							           movimentacao.getNumeroContaDestino() + "          " + 
-							           Data.dataHora(movimentacao.getDatahora()));					
+							           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor -= movimentacao.getValor();
 					totalTributo += movimentacao.getTributo();
@@ -153,7 +153,7 @@ public class ContaCorrente extends Conta{
 					System.out.println(movimentacao.getTipo() +"          -" +
 					           movimentacao.getValor() + "       " +
 					           movimentacao.getTributo() + "                     " +					            
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor -= movimentacao.getValor();
 					totalTributo += movimentacao.getTributo();
@@ -163,7 +163,7 @@ public class ContaCorrente extends Conta{
 					System.out.println(movimentacao.getTipo() +"       +" +
 					           movimentacao.getValor() + "       " +
 					           movimentacao.getTributo() + "                     " +					           
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor += movimentacao.getValor();
 					totalTributo += movimentacao.getTributo();

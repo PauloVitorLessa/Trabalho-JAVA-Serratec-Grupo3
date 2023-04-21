@@ -52,14 +52,14 @@ public class Escreve {
 					case TRANSFERENCIA:
 						pw.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "       "
 								+ movimentacao.getTributo() + "          " + movimentacao.getNumeroContaDestino()
-								+ "          " + Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ "          " + movimentacao.getDatahora() + "\n");
 						totalValor -= movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
 					case SAQUE:
 						pw.println(movimentacao.getTipo() + "          -" + movimentacao.getValor() + "       "
 								+ movimentacao.getTributo() + "                     "
-								+ Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ movimentacao.getDatahora() + "\n");
 						totalValor -= movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
@@ -67,7 +67,7 @@ public class Escreve {
 					case DEPOSITO:
 						pw.println(movimentacao.getTipo() + "       +" + movimentacao.getValor() + "       "
 								+ movimentacao.getTributo() + "                     "
-								+ Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ movimentacao.getDatahora() + "\n");
 						totalValor += movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
@@ -113,18 +113,18 @@ public class Escreve {
 					case TRANSFERENCIA:
 						pw.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
 								+ movimentacao.getNumeroContaDestino() + "          "
-								+ Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ movimentacao.getDatahora() + "\n");
 						totalValor -= movimentacao.getValor();
 						break;
 					case SAQUE:
 						pw.println(movimentacao.getTipo() + "          -" + movimentacao.getValor() + "         "
-								+ Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ movimentacao.getDatahora() + "\n");
 						totalValor -= movimentacao.getValor();
 						break;
 
 					case DEPOSITO:
 						pw.println(movimentacao.getTipo() + "       +" + movimentacao.getValor() + "         "
-								+ Data.dataHora(movimentacao.getDatahora()) + "\n");
+								+ movimentacao.getDatahora() + "\n");
 						totalValor += movimentacao.getValor();
 						break;
 
@@ -160,7 +160,7 @@ public class Escreve {
 			for (Pessoa pessoa : Listas.pessoa) {
 				if (pessoa.getTipo() == Cargo.GERENTE) {
 					pw.println(pessoa.getTipo() + ";" + pessoa.getNome() + ";" + pessoa.getCpf() + ";"
-							+ pessoa.getSenha() + ";" + ((Gerente) pessoa).getAgencia().getGerente());
+							+ pessoa.getSenha() + ";" + ((Gerente) pessoa).getAgencia().getNumeroAgencia());
 				} else {
 					pw.println(pessoa.getTipo() + ";" + pessoa.getNome() + ";" + pessoa.getCpf() + ";"
 							+ pessoa.getSenha());
@@ -177,6 +177,7 @@ public class Escreve {
 			}
 
 			for (Movimentacao movimento : Listas.movimentacao) {
+							
 
 				pw.println(movimento.getTipo() + ";" + movimento.getConta() + ";" + movimento.getNumeroContaDestino()
 						+ ";" + movimento.getValor() + ";" + movimento.getTributo() + ";" + movimento.getDatahora());
@@ -207,7 +208,7 @@ public class Escreve {
 					
 				String[] campos = itens.split(";");
 
-				for (String campo : campos) {
+				//for (String campo : campos) {
 
 					switch (campos[0]) {
 
@@ -283,63 +284,37 @@ public class Escreve {
 
 //=====================================================					
 
-					case "SAQUE":
-
-						SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-						Date date = null;
-						try {
-							date = dateFormat.parse(campos[6]);
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
+					case "SAQUE":						
 
 						Movimentacao saque = new Movimentacao(Integer.parseInt(campos[1]), Integer.parseInt(campos[2]),
-								MovimentosEnum.valueOf(campos[3]), Double.parseDouble(campos[4]),
-								Double.parseDouble(campos[5]), date);
+								MovimentosEnum.valueOf(campos[0]), Double.parseDouble(campos[3]),
+								Double.parseDouble(campos[4]), campos[5]);
 						Listas.movimentacao.add(saque);
 
 						break;
 //=====================================================						
 
-					case "DEPOSITO":
-
-						SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
-						Date date1 = null;
-						try {
-							date1 = dateFormat1.parse(campos[6]);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					case "DEPOSITO":						
 
 						Movimentacao deposito = new Movimentacao(Integer.parseInt(campos[1]),
-								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[3]),
-								Double.parseDouble(campos[4]), Double.parseDouble(campos[5]), date1);
+								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
+								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]),campos[5]);
 						Listas.movimentacao.add(deposito);
 						break;
 
 //=====================================================											
-					case "TRANSFERENCIA":
-
-						SimpleDateFormat dateFormat11 = new SimpleDateFormat("dd/MM/yyyy");
-						Date date11 = null;
-						try {
-							date11 = dateFormat11.parse(campos[6]);
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					case "TRANSFERENCIA":						
 
 						Movimentacao tranferencia = new Movimentacao(Integer.parseInt(campos[1]),
-								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[3]),
-								Double.parseDouble(campos[4]), Double.parseDouble(campos[5]), date11);
+								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
+								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]), campos[5]);
 						Listas.movimentacao.add(tranferencia);
 						break;
 //=====================================================					
 					default:
 						break;
 					}
-				}
+				//}
 
 			}else {
 				break;

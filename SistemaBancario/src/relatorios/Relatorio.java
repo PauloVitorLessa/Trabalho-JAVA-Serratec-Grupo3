@@ -30,7 +30,7 @@ public class Relatorio {
 				case TRANSFERENCIA:					
 					System.out.println(movimentacao.getTipo() +"  " +
 							           movimentacao.getTributo() + "        " +
-							           Data.dataHora(movimentacao.getDatahora()));					
+							           movimentacao.getDatahora());					
 					System.out.println();					
 					totalTributo += movimentacao.getTributo();
 					break;
@@ -38,7 +38,7 @@ public class Relatorio {
 				case SAQUE:					
 					System.out.println(movimentacao.getTipo() +"          " +
 					           movimentacao.getTributo() + "        " +					            
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();					
 					totalTributo += movimentacao.getTributo();
 					break;
@@ -46,7 +46,7 @@ public class Relatorio {
 				case DEPOSITO:					
 					System.out.println(movimentacao.getTipo() +"       " +
 					           movimentacao.getTributo() + "        " +					           
-					           Data.dataHora(movimentacao.getDatahora()));					
+					           movimentacao.getDatahora());					
 					System.out.println();					
 					totalTributo += movimentacao.getTributo();
 					break;

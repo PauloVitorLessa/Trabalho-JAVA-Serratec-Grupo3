@@ -3,6 +3,7 @@ package Movimentos;
 import java.util.Date;
 
 import enuns.MovimentosEnum;
+import utilidades.Data;
 
 public class Movimentacao {
 	
@@ -11,12 +12,12 @@ public class Movimentacao {
 	private MovimentosEnum tipo;
 	private double valor;
 	private double tributo;
-	private Date datahora;
+	private String datahora;
 	
 	
 	
 public Movimentacao(int numeroConta, int numeroContaDestino, MovimentosEnum tipo, double valor, double tributo,
-			Date datahora) {
+			String datahora) {
 		
 		this.numeroConta = numeroConta;
 		this.numeroContaDestino = numeroContaDestino;
@@ -30,7 +31,7 @@ public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double t
 	this.tipo = tipo;
 	this.valor = valor;
 	this.tributo = tributo;
-	this.datahora = new Date();
+	this.datahora = Data.dataHora(new Date());
 	}
 public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double tributo, int numeroContaDestino) {
 	this.numeroConta = numeroConta;
@@ -38,7 +39,7 @@ public Movimentacao(int numeroConta, MovimentosEnum tipo, double valor, double t
 	this.tipo = tipo;
 	this.valor = valor;
 	this.tributo = tributo;
-	this.datahora = new Date();
+	this.datahora = Data.dataHora(new Date());
 	}
 
 public int getConta() {
@@ -57,7 +58,7 @@ public double getTributo() {
 	return tributo;
 }
 
-public Date getDatahora() {
+public String getDatahora() {
 	return datahora;
 }
 public int getNumeroContaDestino() {

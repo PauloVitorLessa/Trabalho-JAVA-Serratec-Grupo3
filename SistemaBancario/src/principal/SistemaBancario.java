@@ -25,7 +25,7 @@ public class SistemaBancario {
 			
 		Escreve.Ler();
 		
-		System.out.println(Maps.mapNumeroConta.toString());
+		System.out.println(Maps.mapNumeroAgencia.toString());
 		
 		
 		Menu.menuLogin();
