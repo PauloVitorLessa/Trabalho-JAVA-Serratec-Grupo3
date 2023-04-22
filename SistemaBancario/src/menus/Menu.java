@@ -115,6 +115,7 @@ public class Menu {
 				break;
 			
 			case 3:
+				Escreve.salvaRegistros();
 				System.out.println("Sistema Encerrado");
 				System.exit(0);
 				break;
@@ -187,6 +188,7 @@ public class Menu {
 					
 					break;
 				case 8:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -333,6 +335,7 @@ public class Menu {
 					break;
 				
 				case 4:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -371,6 +374,7 @@ public class Menu {
 					break;
 				
 				case 4:
+					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
