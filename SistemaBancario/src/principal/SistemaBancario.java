@@ -2,10 +2,8 @@ package principal;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Map.Entry;
-
-import agencias.Agencia;
 import entradasEsaidas.Escreve;
+import listas.Listas;
 import maps.Maps;
 import menus.Menu;
 
@@ -30,6 +28,10 @@ public class SistemaBancario {
 		
 		//System.out.println(Maps.mapNumeroAgencia.toString());	
 System.out.println(Maps.mapCpfPessoaAgencia);
+
+
+
+System.out.println(Listas.movimentacao.toString());
 		
 		
 		

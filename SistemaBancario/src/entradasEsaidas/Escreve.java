@@ -42,6 +42,7 @@ public class Escreve {
 			pw.println("Saldo: R$ " + Arred.dois(saldo, 2));
 			pw.println("-----------------------------------------------------------------------");
 			pw.println("  TIPO         VALOR     TRIBUTO    C. DESTINO     DATA");
+			pw.println("                                    C. ORIGEM");
 			pw.println("-----------------------------------------------------------------------");
 			for (Movimentacao movimentacao : Listas.movimentacao) {
 				if (movimentacao.getConta() == numConta) {
@@ -68,6 +69,14 @@ public class Escreve {
 						totalValor += movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
+						
+					case RECEBIMENTO:
+						pw.println("TRANSFERENCIA  +" + movimentacao.getValor() + "       "
+								+ movimentacao.getTributo() + "          " + movimentacao.getNumeroContaDestino()
+								+ "          " + movimentacao.getDatahora() + "\n");
+						totalValor += movimentacao.getValor();
+						totalTributo += movimentacao.getTributo();
+						break;
 
 					default:
 
@@ -77,7 +86,7 @@ public class Escreve {
 			}
 			pw.println("-----------------------------------------------------------------------");
 			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "    R$ " + Arred.dois(totalTributo, 2) + "\n");
-			pw.println("Saldo: R$ " + Arred.dois(saldo, 2));
+			pw.println("Saldo: R$ " + Arred.dois(totalValor-totalTributo, 2));
 			pw.flush();
 			pw.close();
 			fw.close();
@@ -103,6 +112,7 @@ public class Escreve {
 			pw.println("Saldo: R$ " + Arred.dois(saldo, 2));
 			pw.println("-----------------------------------------------------------------------");
 			pw.println("  TIPO         VALOR         C. DESTINO     DATA");
+			pw.println("                             C. ORIGEM");
 			pw.println("-----------------------------------------------------------------------");
 			for (Movimentacao movimentacao : Listas.movimentacao) {
 				if (movimentacao.getConta() == numConta) {
@@ -124,6 +134,13 @@ public class Escreve {
 								+ movimentacao.getDatahora() + "\n");
 						totalValor += movimentacao.getValor();
 						break;
+						
+					case RECEBIMENTO:
+						pw.println("TRANSFERENCIA  +" + movimentacao.getValor() + "         "
+								+ movimentacao.getNumeroContaDestino() + "          "
+								+ movimentacao.getDatahora() + "\n");
+						totalValor += movimentacao.getValor();
+						break;
 
 					default:
 
@@ -132,8 +149,7 @@ public class Escreve {
 				}
 			}
 			pw.println("-----------------------------------------------------------------------");
-			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "\n");
-			pw.println("Saldo: R$ " + Arred.dois(saldo, 2));
+			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "\n");			
 			pw.flush();
 			pw.close();
 			fw.close();
@@ -307,7 +323,15 @@ public class Escreve {
 								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]), campos[5]);
 						Listas.movimentacao.add(tranferencia);
 						break;
-//=====================================================					
+//=====================================================	
+					case "RECEBIMENTO":						
+
+						Movimentacao tranferencia2 = new Movimentacao(Integer.parseInt(campos[1]),
+								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
+								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]), campos[5]);
+						Listas.movimentacao.add(tranferencia2);
+						break;
+//=====================================================
 					default:
 						break;
 					}

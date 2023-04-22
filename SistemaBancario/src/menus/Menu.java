@@ -119,6 +119,10 @@ public class Menu {
 				System.out.println("Sistema Encerrado");
 				System.exit(0);
 				break;
+				
+				default:
+					System.out.println("Opção inválida !!");
+					break;
 					
 				}
 			} while (true);
@@ -226,7 +230,9 @@ public class Menu {
 				System.out.println("3 - Transferir");
 				System.out.println("4 - Extrato");
 				System.out.println("5 - Simulação de rendimento");
-				System.out.println("6 - Sair");
+				System.out.println("6 - Saldo");
+				System.out.println("7 - Voltar");
+				System.out.println("8 - Sair");
 				System.out.println("===========================");
 				
 				opcaoPp = ler.nextInt();
@@ -271,6 +277,11 @@ public class Menu {
 					((ContaPoupanca) conta).simular(valor, dias);
 					break;
 				case 6:
+					Relatorio.relSaldo(conta);
+				case 7:
+					break;
+					
+				case 8:
 					Escreve.salvaRegistros();
 					System.out.println("Sistema Encerrado");
 					System.exit(0);					
@@ -280,7 +291,7 @@ public class Menu {
 					break;
 				}
 				
-				}while(opcaoPp != 6);
+				}while(opcaoPp != 7);
 					
 				
 			} else {
@@ -341,6 +352,10 @@ public class Menu {
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
+					
+					default:
+						System.out.println("Opção inválida !!");
+						break;
 						
 					}
 				} while (true);
@@ -380,6 +395,10 @@ public class Menu {
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
+					
+					default:
+						System.out.println("Opção inválida !!");
+						break;
 						
 					}
 				} while (true);
@@ -422,6 +441,10 @@ public class Menu {
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
+					
+					default:
+						System.out.println("Opção inválida !!");
+						break;
 						
 					}
 				} while (true);
@@ -459,7 +482,7 @@ public class Menu {
 				FileWriter fw = new FileWriter(path, true);
 				PrintWriter pw = new PrintWriter(fw);
 				pw.println("-----------------------------------------------------------------------");
-				pw.println("O RELATORIO DE CLIENTES\n");
+				pw.println("RELATORIO DE CLIENTES\n");
 				pw.println(data);
 				pw.println("-----------------------------------------------------------------------");
 				pw.println("  AGÊNCIA     CPF    NOME    ");
@@ -499,7 +522,7 @@ public class Menu {
 			System.out.println(Arred.dois(valorTributo, 2));
 			System.out.println("-----------------------------------------------------------------------");
 			System.out.println("  VALOR LÍQUIDO  ");
-			System.out.println(Arred.dois(valorTributo+valorConta, 0));
+			System.out.println(Arred.dois(valorTributo+valorConta, 2));
 			
 		}
 }

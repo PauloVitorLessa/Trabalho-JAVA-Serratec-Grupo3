@@ -4,6 +4,7 @@ public enum MovimentosEnum {
 	
 	SAQUE,
 	DEPOSITO,
-	TRANSFERENCIA;
+	TRANSFERENCIA,
+	RECEBIMENTO;
 
 }

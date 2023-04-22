@@ -86,9 +86,11 @@ public class ContaCorrente extends Conta{
 				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
 					setSaldo(getSaldo() - valor - tributoTransferencia);
 					contaDestino.recebeTransferencia(valor);
-					System.out.println("Transferência concluída!");
-					Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
+					Movimentacao movimento=new Movimentacao(contaDestino.getNumeroConta(), MovimentosEnum.RECEBIMENTO, valor, 0,this.getNumeroConta());
 					Listas.movimentacao.add(movimento);
+					System.out.println("Transferência concluída!");
+					Movimentacao movimento1=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
+					Listas.movimentacao.add(movimento1);
 					this.setTotaltributo(tributoTransferencia);
 					return true;
 				}
@@ -129,6 +131,7 @@ public class ContaCorrente extends Conta{
 		System.out.println("Saldo: R$ " + Arred.dois(this.getSaldo(), 2));
 		System.out.println("-----------------------------------------------------------------------");
 		System.out.println("  TIPO         VALOR     TRIBUTO    C. DESTINO     DATA");
+		System.out.println("                                    C. ORIGEM");
 		System.out.println("-----------------------------------------------------------------------");
 		
 		double totalValor = 0;
@@ -167,6 +170,16 @@ public class ContaCorrente extends Conta{
 					totalValor += movimentacao.getValor();
 					totalTributo += movimentacao.getTributo();
 					break;
+				case RECEBIMENTO:					
+					System.out.println("TRANSFERENCIA  +" +
+							           movimentacao.getValor() + "       " +
+							           movimentacao.getTributo() + "          " +
+							           movimentacao.getNumeroContaDestino() + "          " + 
+							           movimentacao.getDatahora());					
+					System.out.println();
+					totalValor += movimentacao.getValor();
+					totalTributo += movimentacao.getTributo();
+					break;
 
 				default:
 					break;
@@ -177,6 +190,8 @@ public class ContaCorrente extends Conta{
 		System.out.println("-----------------------------------------------------------------------");
 		System.out.println("TOTAL:       R$ " + Arred.dois(totalValor, 2)+
 				           "    R$ "+ Arred.dois(totalTributo, 2));
+		System.out.println("\n");
+		System.out.println("Sado: R$ " + Arred.dois(totalValor-totalTributo, 2));
 		System.out.println("\n");
 		Escreve.extratoCorrente(this.getNumeroConta(), this.getPessoa().getNome(), this.getSaldo());
 	}	

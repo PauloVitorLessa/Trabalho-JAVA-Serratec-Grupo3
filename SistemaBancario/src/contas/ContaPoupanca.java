@@ -64,9 +64,11 @@ public class ContaPoupanca extends Conta{
 				if(this.getNumeroConta()!= contaDestino.getNumeroConta()) {
 					setSaldo(getSaldo() - valor);
 					contaDestino.recebeTransferencia(valor);
-					System.out.println("Transferência concluída!");
-					Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
+					Movimentacao movimento=new Movimentacao(contaDestino.getNumeroConta(), MovimentosEnum.RECEBIMENTO, valor, 0,this.getNumeroConta());
 					Listas.movimentacao.add(movimento);
+					System.out.println("Transferência concluída!");
+					Movimentacao movimento1=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, 0,contaDestino.getNumeroConta());
+					Listas.movimentacao.add(movimento1);
 					return true;
 				}
 				else {
@@ -104,6 +106,7 @@ public class ContaPoupanca extends Conta{
 		System.out.println("Saldo: R$ " + Arred.dois(this.getSaldo(), 2));
 		System.out.println("-----------------------------------------------------------------------");
 		System.out.println("  TIPO         VALOR         C. DESTINO     DATA");
+		System.out.println("                             C. ORIGEM");
 		System.out.println("-----------------------------------------------------------------------");
 		
 		double totalValor = 0;		
@@ -132,6 +135,15 @@ public class ContaPoupanca extends Conta{
 					System.out.println(movimentacao.getTipo() +"       +" +
 					           movimentacao.getValor() + "                      " +
 					           movimentacao.getDatahora());					
+					System.out.println();
+					totalValor += movimentacao.getValor();					
+					break;
+					
+				case RECEBIMENTO:					
+					System.out.println("TRANSFERENCIA  +" +
+							           movimentacao.getValor() + "              " +
+							           movimentacao.getNumeroContaDestino() + "         " + 
+							           movimentacao.getDatahora());					
 					System.out.println();
 					totalValor += movimentacao.getValor();					
 					break;
