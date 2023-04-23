@@ -56,24 +56,24 @@ public class Escreve {
 						break;
 					case SAQUE:
 						pw.println(movimentacao.getTipo() + "          -" + movimentacao.getValor() + "       "
-								+ movimentacao.getTributo() + "                     "
-								+ movimentacao.getDatahora() + "\n");
+								+ movimentacao.getTributo() + "                     " + movimentacao.getDatahora()
+								+ "\n");
 						totalValor -= movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
 
 					case DEPOSITO:
 						pw.println(movimentacao.getTipo() + "       +" + movimentacao.getValor() + "       "
-								+ movimentacao.getTributo() + "                     "
-								+ movimentacao.getDatahora() + "\n");
+								+ movimentacao.getTributo() + "                     " + movimentacao.getDatahora()
+								+ "\n");
 						totalValor += movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
-						
+
 					case RECEBIMENTO:
-						pw.println("TRANSFERENCIA  +" + movimentacao.getValor() + "       "
-								+ movimentacao.getTributo() + "          " + movimentacao.getNumeroContaDestino()
-								+ "          " + movimentacao.getDatahora() + "\n");
+						pw.println("TRANSFERENCIA  +" + movimentacao.getValor() + "       " + movimentacao.getTributo()
+								+ "          " + movimentacao.getNumeroContaDestino() + "          "
+								+ movimentacao.getDatahora() + "\n");
 						totalValor += movimentacao.getValor();
 						totalTributo += movimentacao.getTributo();
 						break;
@@ -86,7 +86,7 @@ public class Escreve {
 			}
 			pw.println("-----------------------------------------------------------------------");
 			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "    R$ " + Arred.dois(totalTributo, 2) + "\n");
-			pw.println("Saldo: R$ " + Arred.dois(totalValor-totalTributo, 2));
+			pw.println("Saldo: R$ " + Arred.dois(totalValor - totalTributo, 2));
 			pw.flush();
 			pw.close();
 			fw.close();
@@ -119,8 +119,8 @@ public class Escreve {
 					switch (movimentacao.getTipo()) {
 					case TRANSFERENCIA:
 						pw.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
-								+ movimentacao.getNumeroContaDestino() + "          "
-								+ movimentacao.getDatahora() + "\n");
+								+ movimentacao.getNumeroContaDestino() + "          " + movimentacao.getDatahora()
+								+ "\n");
 						totalValor -= movimentacao.getValor();
 						break;
 					case SAQUE:
@@ -134,11 +134,11 @@ public class Escreve {
 								+ movimentacao.getDatahora() + "\n");
 						totalValor += movimentacao.getValor();
 						break;
-						
+
 					case RECEBIMENTO:
 						pw.println("TRANSFERENCIA  +" + movimentacao.getValor() + "         "
-								+ movimentacao.getNumeroContaDestino() + "          "
-								+ movimentacao.getDatahora() + "\n");
+								+ movimentacao.getNumeroContaDestino() + "          " + movimentacao.getDatahora()
+								+ "\n");
 						totalValor += movimentacao.getValor();
 						break;
 
@@ -149,7 +149,7 @@ public class Escreve {
 				}
 			}
 			pw.println("-----------------------------------------------------------------------");
-			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "\n");			
+			pw.println("TOTAL:       R$ " + Arred.dois(totalValor, 2) + "\n");
 			pw.flush();
 			pw.close();
 			fw.close();
@@ -190,7 +190,6 @@ public class Escreve {
 			}
 
 			for (Movimentacao movimento : Listas.movimentacao) {
-							
 
 				pw.println(movimento.getTipo() + ";" + movimento.getConta() + ";" + movimento.getNumeroContaDestino()
 						+ ";" + movimento.getValor() + ";" + movimento.getTributo() + ";" + movimento.getDatahora());
@@ -207,21 +206,21 @@ public class Escreve {
 
 	}
 
-	public static void Ler() {		
+	public static void Ler() {
 
 		String path = ".\\arquivos\\Objetos.txt";
 
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String itens;
-			while(true){
+			while (true) {
 				itens = br.readLine();
-				if(itens != null) {
+				if (itens != null) {
 
 //instancia Objetos
-					
-				String[] campos = itens.split(";");
 
-				//for (String campo : campos) {
+					String[] campos = itens.split(";");
+
+					// for (String campo : campos) {
 
 					switch (campos[0]) {
 
@@ -252,10 +251,12 @@ public class Escreve {
 //======g=======================================
 					case "GERENTE":
 
-						Pessoa g1 = new Gerente(campos[1], campos[2], campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
+						Pessoa g1 = new Gerente(campos[1], campos[2], campos[3],
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
 						Listas.pessoa.add(g1);
 						Maps.mapCpfPessoa.put(campos[2], g1);
-						Maps.mapCpfGerenteAgencia.put(campos[2], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
+						Maps.mapCpfGerenteAgencia.put(campos[2],
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[4])));
 						Maps.mapAgenciaGerente.put(Integer.parseInt(campos[4]), campos[2]);
 
 						break;
@@ -272,13 +273,14 @@ public class Escreve {
 					case "CORRENTE":
 //lembrete
 						Conta cc1 = new ContaCorrente(Double.parseDouble(campos[1]),
-								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])), Maps.mapCpfPessoa.get(campos[3]),
-								Double.parseDouble(campos[4]));
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])),
+								Maps.mapCpfPessoa.get(campos[3]), Double.parseDouble(campos[4]));
 
 						Listas.conta.add(cc1);
 						Maps.mapNumeroConta.put(cc1.getNumeroConta(), cc1);
 						Maps.mapCpfContaCorrente.put(campos[3], cc1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]),
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
@@ -286,18 +288,20 @@ public class Escreve {
 					case "POUPANCA":
 
 						Conta cp1 = new ContaPoupanca(Double.parseDouble(campos[1]),
-								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])), Maps.mapCpfPessoa.get(campos[3]));
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])),
+								Maps.mapCpfPessoa.get(campos[3]));
 						Listas.conta.add(cp1);
 						Maps.mapNumeroConta.put(cp1.getNumeroConta(), cp1);
 						Maps.mapCpfContaPoupanca.put(campos[3], cp1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]), Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]),
+								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
 
 //=====================================================					
 
-					case "SAQUE":						
+					case "SAQUE":
 
 						Movimentacao saque = new Movimentacao(Integer.parseInt(campos[1]), Integer.parseInt(campos[2]),
 								MovimentosEnum.valueOf(campos[0]), Double.parseDouble(campos[3]),
@@ -307,16 +311,16 @@ public class Escreve {
 						break;
 //=====================================================						
 
-					case "DEPOSITO":						
+					case "DEPOSITO":
 
 						Movimentacao deposito = new Movimentacao(Integer.parseInt(campos[1]),
 								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
-								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]),campos[5]);
+								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]), campos[5]);
 						Listas.movimentacao.add(deposito);
 						break;
 
 //=====================================================											
-					case "TRANSFERENCIA":						
+					case "TRANSFERENCIA":
 
 						Movimentacao tranferencia = new Movimentacao(Integer.parseInt(campos[1]),
 								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
@@ -324,7 +328,7 @@ public class Escreve {
 						Listas.movimentacao.add(tranferencia);
 						break;
 //=====================================================	
-					case "RECEBIMENTO":						
+					case "RECEBIMENTO":
 
 						Movimentacao tranferencia2 = new Movimentacao(Integer.parseInt(campos[1]),
 								Integer.parseInt(campos[2]), MovimentosEnum.valueOf(campos[0]),
@@ -335,18 +339,102 @@ public class Escreve {
 					default:
 						break;
 					}
-				//}
+					// }
 
-			}else {
-				break;
+				} else {
+					break;
+				}
 			}
-		}
 
 		}
 
 		catch (IOException e) {
 			System.err.format("Erro de E/S: %s%n", e);
+		}
 	}
+
+	public static void Comprovantes(String titular) {
+		try {
+
+			for (Movimentacao movimentacao : Listas.movimentacao) {
+
+				String data = Data.dataHora(new Date());
+				String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+				switch (movimentacao.getTipo()) {
+
+				case TRANSFERENCIA:
+
+					String patht = ".\\arquivos\\Comprovande_De_Transferencia-" + titular + "-" + dataSemEspaco
+							+ ".txt";
+					FileWriter fwt = new FileWriter(patht, true);
+					PrintWriter pwt = new PrintWriter(fwt);
+					pwt.println("COMPROVANTE TRANSFERENCIAn");
+
+					pwt.println("Data: " + data);
+					pwt.println("-----------------------------------------------------------------------");
+					pwt.println("  TIPO         VALOR         C. DESTINO     DATA");
+					pwt.println("                             C. ORIGEM");
+					pwt.println("-----------------------------------------------------------------------");
+
+					pwt.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
+							+ movimentacao.getNumeroContaDestino() + "          " + movimentacao.getDatahora() + "\n");
+
+					pwt.flush();
+					pwt.close();
+					fwt.close();
+					break;
+				case SAQUE:
+
+					String paths = ".\\arquivos\\Comprovande_De_Saque-" + titular + "-" + dataSemEspaco + ".txt";
+					FileWriter fws = new FileWriter(paths, true);
+					PrintWriter pws = new PrintWriter(fws);
+					pws.println("COMPROVANTE SAQUEn");
+					pws.println("Data: " + data);
+					pws.println("-----------------------------------------------------------------------");
+					pws.println("  TIPO         VALOR            DATA");
+					pws.println("                             ");
+					pws.println("-----------------------------------------------------------------------");
+
+					pws.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
+							+ movimentacao.getDatahora() + "\n");
+
+					pws.flush();
+					pws.close();
+					fws.close();
+
+					break;
+
+				case DEPOSITO:
+
+					String pathd = ".\\arquivos\\Comprovande_De_Deposito-" + titular + "-" + dataSemEspaco + ".txt";
+					FileWriter fwd = new FileWriter(pathd, true);
+					PrintWriter pwd = new PrintWriter(fwd);
+					pwd.println("COMPROVANTE Depositon");
+					pwd.println("Data: " + data);
+					pwd.println("-----------------------------------------------------------------------");
+					pwd.println("  TIPO         VALOR            DATA");
+					pwd.println("                             ");
+					pwd.println("-----------------------------------------------------------------------");
+
+					pwd.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
+							+ movimentacao.getDatahora() + "\n");
+
+					pwd.flush();
+					pwd.close();
+					fwd.close();
+					break;
+
+				default:
+
+				}
+
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 }
