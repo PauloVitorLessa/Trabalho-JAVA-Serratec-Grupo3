@@ -1,8 +1,10 @@
 package contas;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import Movimentos.Movimentacao;
 import agencias.Agencia;
 import entradasEsaidas.Escreve;
@@ -11,10 +13,11 @@ import enuns.MovimentosEnum;
 import listas.Listas;
 import pessoas.Pessoa;
 import utilidades.Arred;
+import utilidades.Data;
 
 public class ContaPoupanca extends Conta{
 	
-	private double rendimento = 0.00017;
+	private double rendimento = 0.0002;
 	
 	
 	public ContaPoupanca(double saldo, Agencia agencia, Pessoa pessoa) {
@@ -164,8 +167,42 @@ public class ContaPoupanca extends Conta{
 		Double capital = valor;
 		Double montante;
 	    int tempo = dias;
-	    montante = capital * Math.pow(1 + this.rendimento, tempo); 
-	    System.out.println("Total Simulado em " + dias + " dias de : " + Arred.dois(montante, 2));
+	    montante = capital * Math.pow(1 + this.rendimento, tempo);
+	    double rendimento = montante-capital;
+	    String data = Data.dataHora(new Date());
+	    System.out.println("-----------------------------------------------------------------------");
+	    System.out.println("### SIMULAÇÃO DE RENDIMENTO DA POUPANÇA###\n");
+		System.out.println("Número da conta: " + this.getNumeroConta());				
+		System.out.println("Data: " + data);
+	    System.out.printf("Valor Simulado: R$ %.2f" , Arred.dois(valor, 2));
+	    System.out.println("\nPrazo simulado: "+ dias + " dias");
+	    System.out.println("Taxa de rendimento ao dia: "+ Arred.dois(this.rendimento*100, 2) + "%");
+	    System.out.printf("Total do rendimento: R$ %.2f",Arred.dois(rendimento, 2));
+	    System.out.printf("\nMontante final: R$ %.2f",Arred.dois(montante, 2));
+	    System.out.println("\n\n");
+	    
+	    try {	    	
+	    	String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			String path = ".\\arquivos\\Simulacao-rendimento-"+dataSemEspaco+".txt";
+			FileWriter fw = new FileWriter(path, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("### SIMULAÇÃO DE RENDIMENTO DA POUPANÇA###\n");
+			pw.println("Número da conta: " + this.getNumeroConta());
+			pw.println("Data: " + data);
+			pw.printf("Valor Simulado: R$ %.2f", Arred.dois(valor, 2));
+			pw.println("\nPrazo simulado: "+ dias + " dias");
+			pw.println("Taxa de rendimento ao dia: "+ Arred.dois(this.rendimento*100, 2) + "%");
+			pw.printf("Total do rendimento: R$ %.2f",Arred.dois(rendimento, 2));
+			pw.printf("\nMontante final: R$ %.2f",Arred.dois(montante, 2));
+			pw.flush();
+			pw.close();
+			fw.close();
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+		}
+	    
 	    
 	}
 }

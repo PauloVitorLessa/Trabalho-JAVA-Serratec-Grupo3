@@ -1,5 +1,8 @@
 package relatorios;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -60,13 +63,95 @@ public class Relatorio {
 		System.out.println("-----------------------------------------------------------------------");
 		System.out.println("TOTAL:         " + Arred.dois(totalTributo, 2));
 		System.out.println("\n");
+		
+		try {	    	
+	    	String dataSemEspaco = Data.dataHoraSemEspaco(date);
+			String path = ".\\arquivos\\Relatorio-tributacao-"+dataSemEspaco+".txt";
+			FileWriter fw = new FileWriter(path, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("### RELATÓRIO DE TRIBUTAÇÃO ###");
+			pw.println();
+			pw.println("Número da conta: " + conta.getNumeroConta());					
+			pw.println("Data: " + sdf.format(date));
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("  TIPO       TRIBUTO      DATA");
+			pw.println("-----------------------------------------------------------------------");
+						
+			for(Movimentacao movimentacao : Listas.movimentacao){
+				if(movimentacao.getConta() == conta.getNumeroConta()){
+					switch (movimentacao.getTipo()) {
+					case TRANSFERENCIA:					
+						pw.println(movimentacao.getTipo() +"  " +
+								           movimentacao.getTributo() + "        " +
+								           movimentacao.getDatahora());					
+						pw.println();					
+						totalTributo += movimentacao.getTributo();
+						break;
+						
+					case SAQUE:					
+						pw.println(movimentacao.getTipo() +"          " +
+						           movimentacao.getTributo() + "        " +					            
+						           movimentacao.getDatahora());					
+						pw.println();					
+						totalTributo += movimentacao.getTributo();
+						break;
+						
+					case DEPOSITO:					
+						pw.println(movimentacao.getTipo() +"       " +
+						           movimentacao.getTributo() + "        " +					           
+						           movimentacao.getDatahora());					
+						pw.println();					
+						totalTributo += movimentacao.getTributo();
+						break;
+
+					default:
+						break;
+					}
+					
+				}
+			}
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("TOTAL:         " + Arred.dois(totalTributo, 2));
+			pw.println("\n");
+			pw.flush();
+			pw.close();
+			fw.close();
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+		}
 				
 
 	}
 	
 	public static void relSaldo(Conta conta) {
-		Date agora = new Date();		
-		System.out.printf("Seu saldo é de: R$ " + Arred.dois(conta.getSaldo(), 2) + "    " + Data.dataHora(agora));
-		System.out.println("\n\n");
+		Date data = (new Date());
+		String dataComEspaco = Data.dataHora(data);
+		System.out.println("-----------------------------------------------------------------------");
+		System.out.println("### COMPROVANTE DE SALDO ###\n");
+		System.out.println("Data: " + dataComEspaco);
+		System.out.println("Número da conta: " + conta.getNumeroConta());
+		System.out.printf("Saldo: R$ %.2f" , Arred.dois(conta.getSaldo(), 2));
+		System.out.println("\n-----------------------------------------------------------------------");
+		System.out.println("\n");
+		
+		try {	    	
+	    	String dataSemEspaco = Data.dataHoraSemEspaco(data);
+			String path = ".\\arquivos\\Comprovante-Saldo-"+dataSemEspaco+".txt";
+			FileWriter fw = new FileWriter(path, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println("-----------------------------------------------------------------------");
+			pw.println("### COMPROVANTE DE SALDO ###\n");
+			pw.println("Data: " + data);
+			pw.println("Número da conta: " + conta.getNumeroConta());
+			pw.printf("Saldo: R$ %.2f" , Arred.dois(conta.getSaldo(), 2));
+			pw.println("\n-----------------------------------------------------------------------");
+			pw.flush();
+			pw.close();
+			fw.close();
+		} catch(IOException e) {
+			
+			e.printStackTrace();
+		}
 	}
 }

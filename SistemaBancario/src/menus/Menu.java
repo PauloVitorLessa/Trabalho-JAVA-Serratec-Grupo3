@@ -325,22 +325,34 @@ public class Menu {
 					break;
 					
 				case 3:
+					Date data = new Date();
+					String dataComEspaco = Data.dataHora(data);
+					System.out.println("-----------------------------------------------------------------------");
+					System.out.println("### RELATÓRIO DO NÚMERO DE CONTAS GERENCIADAS ###\n");
+					System.out.println("GERENTE: " + gerente.getNome() );
+					System.out.println("CPF: " + gerente.getCpf() );
+					System.out.println("NÚMERO DE CONTAS GERENCIADAS: " +
+					Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
+					System.out.println("DATA: " + dataComEspaco);
+					System.out.println("-----------------------------------------------------------------------");
+					
 					try {
-						System.out.println("O número total de contas desta agência é: " +
-					            Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
-			String data = Data.dataHora(new Date());
-			String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
-			String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
-			FileWriter fw = new FileWriter(path, true);
-			PrintWriter pw = new PrintWriter(fw);
-			pw.println("-----------------------------------------------------------------------");
-			pw.println("O número total de contas gerenciadas é: " +
-		               Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
-			pw.println(data);
-			pw.println("-----------------------------------------------------------------------");
-			pw.flush();
-			pw.close();
-			fw.close();
+						
+						String dataSemEspaco = Data.dataHoraSemEspaco(data);
+						String path = ".\\arquivos\\Relatorio-gerente-"+dataSemEspaco+".txt";
+						FileWriter fw = new FileWriter(path, true);
+						PrintWriter pw = new PrintWriter(fw);
+						pw.println("-----------------------------------------------------------------------");
+						pw.println("### RELATÓRIO DO NÚMERO DE CONTAS GERENCIADAS ###\n");
+						pw.println("GERENTE: " + gerente.getNome() );
+						pw.println("CPF: " + gerente.getCpf() );
+						pw.println("NÚMERO DE CONTAS GERENCIADAS: " +
+						Maps.mapCpfGerenteAgencia.get(gerente.getCpf()).getContas());
+						pw.println("DATA: " + dataComEspaco);
+						pw.println("-----------------------------------------------------------------------");
+						pw.flush();
+						pw.close();
+						fw.close();
 					} catch(IOException e) {
 						
 						e.printStackTrace();
