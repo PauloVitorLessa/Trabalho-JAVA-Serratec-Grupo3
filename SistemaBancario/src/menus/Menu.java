@@ -515,14 +515,16 @@ public class Menu {
 		}			
 			
 		public static void relatorioPresidente() {
+			String data = Data.dataHora(new Date());
+	        String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
+			
 			double valorConta = 0.0;
 			double valorTributo = 0.0;
 			
 			for(Conta conta:Listas.conta) {
 				valorConta += conta.getSaldo();
 				valorTributo += conta.getTotalTributo();
-			}
-			String data = Data.dataHora(new Date());			
+			}			
 			
 			System.out.println("RELATORIO DE VALORES NO BANCO\n");
 			System.out.println(data);					
@@ -536,6 +538,27 @@ public class Menu {
 			System.out.println("  VALOR LÍQUIDO  ");
 			System.out.println(Arred.dois(valorTributo+valorConta, 2));
 			
+		 try {
+
+	            String path = ".\\arquivos\\Relatorio-Presidenter-" + dataSemEspaco + ".txt";
+	            FileWriter fw = new FileWriter(path, true);
+	            try (PrintWriter pw = new PrintWriter(fw)) {
+	                pw.println("RELATORIO DE VALORES NO BANCO\n");
+	                pw.println(data);
+	                pw.println("-----------------------------------------------------------------------");
+	                pw.println("  VALOR CONTAS  ");
+	                pw.println(Arred.dois(valorConta, 2));
+	                pw.println("-----------------------------------------------------------------------");
+	                pw.println("  VALOR TRIBUTO  ");
+	                pw.println(Arred.dois(valorTributo, 2));
+	                pw.println("-----------------------------------------------------------------------");
+	                pw.println("  VALOR LÍQUIDO  ");
+	                pw.println(Arred.dois(valorTributo + valorConta, 2));
+	            } 
+	                } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
 		}
 }
 		
