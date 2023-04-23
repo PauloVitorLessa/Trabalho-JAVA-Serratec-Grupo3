@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import entradasEsaidas.Escreve;
 import listas.Listas;
-import maps.Maps;
 import menus.Menu;
 
 public class SistemaBancario {

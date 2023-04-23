@@ -116,6 +116,7 @@ public class Menu {
 			
 			case 3:
 				Escreve.salvaRegistros();
+				Escreve.Comprovantes(cliente.getNome());
 				System.out.println("Sistema Encerrado");
 				System.exit(0);
 				break;
@@ -193,6 +194,7 @@ public class Menu {
 					break;
 				case 8:
 					Escreve.salvaRegistros();
+					Escreve.Comprovantes(cliente.getNome());
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -283,6 +285,7 @@ public class Menu {
 					
 				case 8:
 					Escreve.salvaRegistros();
+					Escreve.Comprovantes(cliente.getNome());
 					System.out.println("Sistema Encerrado");
 					System.exit(0);					
 					break;
@@ -361,6 +364,7 @@ public class Menu {
 				
 				case 4:
 					Escreve.salvaRegistros();
+					Escreve.Comprovantes(gerente.getNome());
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -404,6 +408,7 @@ public class Menu {
 				
 				case 4:
 					Escreve.salvaRegistros();
+					Escreve.Comprovantes(diretor.getNome());
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -450,6 +455,7 @@ public class Menu {
 				
 				case 5:
 					Escreve.salvaRegistros();
+					Escreve.Comprovantes(presidente.getNome());
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;

@@ -368,7 +368,7 @@ public class Escreve {
 							+ ".txt";
 					FileWriter fwt = new FileWriter(patht, true);
 					PrintWriter pwt = new PrintWriter(fwt);
-					pwt.println("COMPROVANTE TRANSFERENCIAn");
+					pwt.println("COMPROVANTE TRANSFERENCIA");
 
 					pwt.println("Data: " + data);
 					pwt.println("-----------------------------------------------------------------------");
@@ -388,14 +388,14 @@ public class Escreve {
 					String paths = ".\\arquivos\\Comprovande_De_Saque-" + titular + "-" + dataSemEspaco + ".txt";
 					FileWriter fws = new FileWriter(paths, true);
 					PrintWriter pws = new PrintWriter(fws);
-					pws.println("COMPROVANTE SAQUEn");
+					pws.println("COMPROVANTE SAQUE");
 					pws.println("Data: " + data);
 					pws.println("-----------------------------------------------------------------------");
 					pws.println("  TIPO         VALOR            DATA");
 					pws.println("                             ");
 					pws.println("-----------------------------------------------------------------------");
 
-					pws.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
+					pws.println(movimentacao.getTipo() + "	  -" + movimentacao.getValor() + "         "
 							+ movimentacao.getDatahora() + "\n");
 
 					pws.flush();
@@ -409,14 +409,14 @@ public class Escreve {
 					String pathd = ".\\arquivos\\Comprovande_De_Deposito-" + titular + "-" + dataSemEspaco + ".txt";
 					FileWriter fwd = new FileWriter(pathd, true);
 					PrintWriter pwd = new PrintWriter(fwd);
-					pwd.println("COMPROVANTE Depositon");
+					pwd.println("COMPROVANTE Deposito");
 					pwd.println("Data: " + data);
 					pwd.println("-----------------------------------------------------------------------");
 					pwd.println("  TIPO         VALOR            DATA");
 					pwd.println("                             ");
 					pwd.println("-----------------------------------------------------------------------");
 
-					pwd.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
+					pwd.println(movimentacao.getTipo() + "   	 " + movimentacao.getValor() + "         "
 							+ movimentacao.getDatahora() + "\n");
 
 					pwd.flush();
