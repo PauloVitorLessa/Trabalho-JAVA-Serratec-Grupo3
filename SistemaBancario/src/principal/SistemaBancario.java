@@ -24,18 +24,8 @@ public class SistemaBancario {
 		}
 			
 		Escreve.Ler();
-		
-		
-		//System.out.println(Maps.mapNumeroAgencia.toString());	
-System.out.println(Maps.mapCpfPessoaAgencia);
-
-
-
-System.out.println(Listas.movimentacao.toString());
-		
-		
-		
+		Listas.movimentacao.clear();
+			
 		Menu.menuLogin();
-		
 	}
 }
