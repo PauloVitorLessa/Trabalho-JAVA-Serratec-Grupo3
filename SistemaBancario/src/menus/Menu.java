@@ -174,7 +174,7 @@ public class Menu {
 						System.out.println("Digite o valor para transferir: ");
 						valor = Double.parseDouble(ler.nextLine());
 						System.out.println("Informe o número da conta destino: ");
-						int contaDestino = ler.nextInt();
+						int contaDestino =Integer.parseInt(ler.nextLine());
 						if (Maps.mapNumeroConta.containsKey(contaDestino)) {
 							Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
 							conta.transferir(valor, contaRecebe);
@@ -274,7 +274,7 @@ public class Menu {
 						System.out.println("Digite o valor para transferir: ");
 						valor = Double.parseDouble(ler.nextLine());
 						System.out.println("Informe o número da conta destino: ");
-						int contaDestino = ler.nextInt();
+						int contaDestino =Integer.parseInt(ler.nextLine());
 						if (Maps.mapNumeroConta.containsKey(contaDestino)) {
 							Conta contaRecebe = Maps.mapNumeroConta.get(contaDestino);
 							conta.transferir(valor, contaRecebe);
