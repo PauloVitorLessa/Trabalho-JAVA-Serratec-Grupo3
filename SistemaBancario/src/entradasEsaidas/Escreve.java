@@ -170,7 +170,7 @@ public class Escreve {
 			PrintWriter pw = new PrintWriter(fw);
 
 			for (Agencia agencia : Listas.agencia) {
-				pw.println(agencia.getTipo() + ";" + agencia.getGerente() + ";" + agencia.getContas());
+				pw.println(agencia.getTipo() + ";" + agencia.getGerente());
 			}
 			for (Pessoa pessoa : Listas.pessoa) {
 				if (pessoa.getTipo() == Cargo.GERENTE) {
@@ -240,7 +240,7 @@ public class Escreve {
 //[====p===================================
 					case "AGENCIA":
 
-						Agencia a1 = new Agencia(campos[1], Integer.parseInt(campos[2]));
+						Agencia a1 = new Agencia(campos[1]);
 						Listas.agencia.add(a1);
 						Maps.mapNumeroAgencia.put(a1.getNumeroAgencia(), a1);
 						break;
@@ -280,12 +280,10 @@ public class Escreve {
 						Conta cc1 = new ContaCorrente(Double.parseDouble(campos[1]),
 								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])),
 								Maps.mapCpfPessoa.get(campos[3]), Double.parseDouble(campos[4]));
-
 						Listas.conta.add(cc1);
+						Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])).addConta();
 						Maps.mapNumeroConta.put(cc1.getNumeroConta(), cc1);
-						Maps.mapCpfContaCorrente.put(campos[3], cc1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]),
-								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapCpfContaCorrente.put(campos[3], cc1);						
 						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
@@ -296,10 +294,9 @@ public class Escreve {
 								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])),
 								Maps.mapCpfPessoa.get(campos[3]));
 						Listas.conta.add(cp1);
+						Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])).addConta();
 						Maps.mapNumeroConta.put(cp1.getNumeroConta(), cp1);
-						Maps.mapCpfContaPoupanca.put(campos[3], cp1);
-						Maps.mapNumeroAgencia.put(Integer.parseInt(campos[2]),
-								Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
+						Maps.mapCpfContaPoupanca.put(campos[3], cp1);						
 						Maps.mapCpfPessoaAgencia.put(campos[3], Maps.mapNumeroAgencia.get(Integer.parseInt(campos[2])));
 
 						break;
