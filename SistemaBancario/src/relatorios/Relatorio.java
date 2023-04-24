@@ -53,6 +53,14 @@ public class Relatorio {
 					System.out.println();					
 					totalTributo += movimentacao.getTributo();
 					break;
+					
+				case SEGURO:					
+					System.out.println(movimentacao.getTipo() +"          " +
+					           movimentacao.getTributo() + "        " +					            
+					           movimentacao.getDatahora());					
+					System.out.println();					
+					totalTributo += movimentacao.getTributo();
+					break;
 
 				default:
 					break;
@@ -99,6 +107,14 @@ public class Relatorio {
 					case DEPOSITO:					
 						pw.println(movimentacao.getTipo() +"       " +
 						           movimentacao.getTributo() + "        " +					           
+						           movimentacao.getDatahora());					
+						pw.println();					
+						totalTributo += movimentacao.getTributo();
+						break;
+						
+					case SEGURO:					
+						pw.println(movimentacao.getTipo() +"          " +
+						           movimentacao.getTributo() + "        " +					            
 						           movimentacao.getDatahora());					
 						pw.println();					
 						totalTributo += movimentacao.getTributo();

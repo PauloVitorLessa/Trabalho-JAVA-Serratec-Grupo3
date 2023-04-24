@@ -39,6 +39,7 @@ public class ContaCorrente extends Conta{
 				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.SAQUE, valor, tributoSaque);
 				Listas.movimentacao.add(movimento);
 				this.setTotaltributo(tributoSaque);
+				Escreve.Comprovantes(this.getPessoa().getNome(), this.getNumeroConta(), 0,MovimentosEnum.SAQUE, valor);
 				return true;
 			}else {
 				System.out.println("Saque não realizado.");
@@ -61,6 +62,7 @@ public class ContaCorrente extends Conta{
 				Movimentacao movimento=new Movimentacao(this.getNumeroConta(), MovimentosEnum.DEPOSITO, valor, tributoDeposito);
 				Listas.movimentacao.add(movimento);
 				this.setTotaltributo(tributoDeposito);
+				Escreve.Comprovantes(this.getPessoa().getNome(), this.getNumeroConta(), 0,MovimentosEnum.DEPOSITO, valor);
 				return true;
 			}else {
 				System.out.println("Deposito não realizado.");
@@ -92,6 +94,7 @@ public class ContaCorrente extends Conta{
 					Movimentacao movimento1=new Movimentacao(this.getNumeroConta(), MovimentosEnum.TRANSFERENCIA, valor, tributoTransferencia,contaDestino.getNumeroConta());
 					Listas.movimentacao.add(movimento1);
 					this.setTotaltributo(tributoTransferencia);
+					Escreve.Comprovantes(this.getPessoa().getNome(), this.getNumeroConta(), contaDestino.getNumeroConta(),MovimentosEnum.TRANSFERENCIA, valor);
 					return true;
 				}
 				else {

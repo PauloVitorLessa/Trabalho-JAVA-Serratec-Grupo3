@@ -28,8 +28,7 @@ public class Menu {
 
 	public static void menuLogin() {
 
-		boolean login = false;
-
+		
 		do {
 			String CPF;
 			String senha;
@@ -53,8 +52,7 @@ public class Menu {
 					
 					System.out.println("\n============================");
 					System.out.println("Bem vindo(a), " + Maps.mapCpfPessoa.get(CPF).getNome()+"\n");
-					login = true;
-
+					
 					switch (Maps.mapCpfPessoa.get(CPF).getTipo()) {
 					case CLIENTE:
 						System.out.println("CLIENTE");
@@ -86,7 +84,7 @@ public class Menu {
 				System.out.println("CPF ou senha Inválidos");
 				System.out.println("______________________________\n\n");
 			}
-		} while (login == false);
+		} while (true);
 
 	}
 
@@ -98,7 +96,7 @@ public class Menu {
 			System.out.println("============================");
 			System.out.println("1 - Conta Corrente");
 			System.out.println("2 - Conta Poupança");
-			System.out.println("3 - sair");
+			System.out.println("3 - Logout");
 			System.out.println("============================");
 
 			opcao = ler.nextInt();
@@ -115,10 +113,9 @@ public class Menu {
 				break;
 			
 			case 3:
-				Escreve.salvaRegistros();
-				Escreve.Comprovantes(cliente.getNome());
-				System.out.println("Sistema Encerrado");
-				System.exit(0);
+				//impede que bugue o menu ao voltar
+				ler.nextLine();
+				Escreve.salvaRegistros();				
 				break;
 				
 				default:
@@ -126,7 +123,7 @@ public class Menu {
 					break;
 					
 				}
-			} while (true);
+			} while (opcao !=3);
 		}
 		public static void menuOperacoesDaContaCorrente(Pessoa cliente) {
 			if (Maps.mapCpfContaCorrente.containsKey(cliente.getCpf())) {
@@ -141,11 +138,12 @@ public class Menu {
 				System.out.println("1 - Saque");
 				System.out.println("2 - Deposito");
 				System.out.println("3 - Transferir");
-				System.out.println("4 - Extrato");
-				System.out.println("5 - Relatorio de Tributação");
-				System.out.println("6 - Saldo");
-				System.out.println("7 - Voltar");
-				System.out.println("8 - Sair do Sistema");
+				System.out.println("4 - Contratar Seguro de vida");
+				System.out.println("5 - Extrato");
+				System.out.println("6 - Relatorio de Tributação");
+				System.out.println("7 - Saldo");
+				System.out.println("8 - Voltar");
+				System.out.println("9 - Sair do Sistema");
 				System.out.println("============================");
 
 				opcaoCc = ler.nextInt();
@@ -179,22 +177,30 @@ public class Menu {
 					System.out.println();
 					break;
 				case 4:
+					System.out.println("==========================");
+					System.out.println("SEGURO DE VIDA: ");
+					System.out.println("==========================");
+					System.out.println("Digite o valor a ser segurado: ");
+					double valorSeguro = ler.nextDouble();
+					cliente.contrataSeguro(cliente, valorSeguro);
+					break;
+					
+				case 5:
 					conta.emitirExtrato();
 					break;
-				case 5:
+				case 6:
 					Relatorio.relTributacao(conta);
 						
 					break;
-				case 6:
+				case 7:
 					Relatorio.relSaldo(conta);
 					
 					break;
-				case 7:
+				case 8:
 					
 					break;
-				case 8:
-					Escreve.salvaRegistros();
-					Escreve.Comprovantes(cliente.getNome());
+				case 9:
+					Escreve.salvaRegistros();					
 					System.out.println("Sistema Encerrado");
 					System.exit(0);
 					break;
@@ -204,7 +210,7 @@ public class Menu {
 				}
 				
 				
-				}while (opcaoCc != 7 );
+				}while (opcaoCc != 8 );
 				
 				
 			
@@ -284,8 +290,7 @@ public class Menu {
 					break;
 					
 				case 8:
-					Escreve.salvaRegistros();
-					Escreve.Comprovantes(cliente.getNome());
+					Escreve.salvaRegistros();					
 					System.out.println("Sistema Encerrado");
 					System.exit(0);					
 					break;
@@ -311,7 +316,7 @@ public class Menu {
 				System.out.println("1 - Conta Corrente");
 				System.out.println("2 - Conta Poupança");
 				System.out.println("3 - Relatorio do número de contas gerenciadas");
-				System.out.println("4 - sair");
+				System.out.println("4 - Logout");
 				System.out.println("============================");
 
 				opcao = ler.nextInt();
@@ -363,10 +368,9 @@ public class Menu {
 					break;
 				
 				case 4:
-					Escreve.salvaRegistros();
-					Escreve.Comprovantes(gerente.getNome());
-					System.out.println("Sistema Encerrado");
-					System.exit(0);
+					//impede que bugue o menu ao voltar
+					ler.nextLine();
+					Escreve.salvaRegistros();					
 					break;
 					
 					default:
@@ -374,7 +378,7 @@ public class Menu {
 						break;
 						
 					}
-				} while (true);
+				} while (opcao !=4);
 			}
 		
 		public static void menuDiretor(Pessoa diretor) {
@@ -386,7 +390,7 @@ public class Menu {
 				System.out.println("1 - Conta Corrente");
 				System.out.println("2 - Conta Poupança");
 				System.out.println("3 - Relatorio de Clientes");
-				System.out.println("4 - sair");
+				System.out.println("4 - Logout");
 				System.out.println("============================");
 
 				opcao = ler.nextInt();
@@ -407,10 +411,9 @@ public class Menu {
 					break;
 				
 				case 4:
-					Escreve.salvaRegistros();
-					Escreve.Comprovantes(diretor.getNome());
-					System.out.println("Sistema Encerrado");
-					System.exit(0);
+					//impede que bugue o menu ao voltar
+					ler.nextLine();
+					Escreve.salvaRegistros();					
 					break;
 					
 					default:
@@ -418,7 +421,7 @@ public class Menu {
 						break;
 						
 					}
-				} while (true);
+				} while (opcao !=4);
 			}
 		
 		public static void menuPresidente(Pessoa presidente) {
@@ -431,7 +434,7 @@ public class Menu {
 				System.out.println("2 - Conta Poupança");
 				System.out.println("3 - Relatorio de Clientes");
 				System.out.println("4 - Relatorio valor armazenado");
-				System.out.println("5 - sair");
+				System.out.println("5 - Logout");
 				System.out.println("============================");
 
 				opcao = ler.nextInt();
@@ -454,10 +457,9 @@ public class Menu {
 					break;
 				
 				case 5:
-					Escreve.salvaRegistros();
-					Escreve.Comprovantes(presidente.getNome());
-					System.out.println("Sistema Encerrado");
-					System.exit(0);
+					//impede que bugue o menu ao voltar
+					ler.nextLine();
+					Escreve.salvaRegistros();					
 					break;
 					
 					default:
@@ -465,7 +467,7 @@ public class Menu {
 						break;
 						
 					}
-				} while (true);
+				} while (opcao !=5);
 			}
 		public static void relatorioDiretor() {
 			String data = Data.dataHora(new Date());
@@ -541,7 +543,7 @@ public class Menu {
 			System.out.println("  VALOR TRIBUTO  ");
 			System.out.println(Arred.dois(valorTributo, 2));
 			System.out.println("-----------------------------------------------------------------------");
-			System.out.println("  VALOR LÍQUIDO  ");
+			System.out.println("  VALOR TOTAL  ");
 			System.out.println(Arred.dois(valorTributo+valorConta, 2));
 			
 		 try {
@@ -558,7 +560,7 @@ public class Menu {
 	                pw.println("  VALOR TRIBUTO  ");
 	                pw.println(Arred.dois(valorTributo, 2));
 	                pw.println("-----------------------------------------------------------------------");
-	                pw.println("  VALOR LÍQUIDO  ");
+	                pw.println("  VALOR TOTAL  ");
 	                pw.println(Arred.dois(valorTributo + valorConta, 2));
 	            } 
 	                } catch (IOException e) {

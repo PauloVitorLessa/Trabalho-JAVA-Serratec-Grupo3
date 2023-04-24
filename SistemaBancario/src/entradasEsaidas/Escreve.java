@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+
 import Movimentos.Movimentacao;
 import agencias.Agencia;
 import contas.Conta;
@@ -21,6 +22,7 @@ import pessoas.Diretor;
 import pessoas.Gerente;
 import pessoas.Pessoa;
 import pessoas.Presidente;
+import seguros.Seguro;
 import utilidades.Arred;
 import utilidades.Data;
 
@@ -188,6 +190,9 @@ public class Escreve {
 							+ ";" + conta.getPessoa().getCpf());
 				}
 			}
+			//for (Seguro seguro : Listas.seguro) {
+				//pw.println(seguro.getTipo() + ";" + seguro.getCliente().getCpf() + ";" + seguro.getValorSeguro());
+			//}
 
 			for (Movimentacao movimento : Listas.movimentacao) {
 
@@ -335,6 +340,18 @@ public class Escreve {
 								Double.parseDouble(campos[3]), Double.parseDouble(campos[4]), campos[5]);
 						Listas.movimentacao.add(tranferencia2);
 						break;
+//=====================================================	
+					case "SEGURO":
+						
+						Conta conta = Maps.mapNumeroConta.get(Integer.parseInt(campos[1]));
+						Seguro seg = new Seguro(conta.getPessoa(),Double.parseDouble(campos[3]));
+						Listas.seguro.add(seg);
+						Maps.mapCpfPessoa.get(conta.getPessoa().getCpf()).setSeguro(seg);
+						Maps.mapCpfSeguro.put(conta.getPessoa().getCpf(), seg);
+						Movimentacao mov = new Movimentacao(conta.getNumeroConta(), MovimentosEnum.SEGURO, Double.parseDouble(campos[2]),Double.parseDouble(campos[2])*0.2);
+						Listas.movimentacao.add(mov);
+						
+						break;
 //=====================================================
 					default:
 						break;
@@ -353,51 +370,48 @@ public class Escreve {
 		}
 	}
 
-	public static void Comprovantes(String titular) {
+	public static void Comprovantes(String titular, int numeroConta, int contaDestino, MovimentosEnum tipo,double valor) {
 		try {
-
-			for (Movimentacao movimentacao : Listas.movimentacao) {
-
-				String data = Data.dataHora(new Date());
-				String dataSemEspaco = Data.dataHoraSemEspaco(new Date());
-				switch (movimentacao.getTipo()) {
+			
+				Date data = new Date();				
+				switch (tipo) {
 
 				case TRANSFERENCIA:
 
-					String patht = ".\\arquivos\\Comprovande_De_Transferencia-" + titular + "-" + dataSemEspaco
-							+ ".txt";
+					String patht = ".\\arquivos\\Comprovande_De_Transferencia-" + titular + "-" +
+					               Data.dataHoraSemEspaco(data)+".txt";
 					FileWriter fwt = new FileWriter(patht, true);
 					PrintWriter pwt = new PrintWriter(fwt);
 					pwt.println("COMPROVANTE TRANSFERENCIA");
-
-					pwt.println("Data: " + data);
+					pwt.println("CONTA: " +numeroConta);
+					pwt.println("Titular: " +titular);
+					pwt.println("Data: " + Data.dataHora(data));
 					pwt.println("-----------------------------------------------------------------------");
-					pwt.println("  TIPO         VALOR         C. DESTINO     DATA");
-					pwt.println("                             C. ORIGEM");
+					pwt.println("  TIPO         VALOR         C. DESTINO     DATA");					
 					pwt.println("-----------------------------------------------------------------------");
 
-					pwt.println(movimentacao.getTipo() + "  -" + movimentacao.getValor() + "         "
-							+ movimentacao.getNumeroContaDestino() + "          " + movimentacao.getDatahora() + "\n");
-
+					pwt.println(tipo + "  " + valor + "                "
+							    + contaDestino + "         " + Data.dataHora(data) + "\n");
 					pwt.flush();
 					pwt.close();
 					fwt.close();
 					break;
 				case SAQUE:
 
-					String paths = ".\\arquivos\\Comprovande_De_Saque-" + titular + "-" + dataSemEspaco + ".txt";
+					String paths = ".\\arquivos\\Comprovande_De_Saque-" + titular + "-" + Data.dataHoraSemEspaco(data) + ".txt";
 					FileWriter fws = new FileWriter(paths, true);
 					PrintWriter pws = new PrintWriter(fws);
 					pws.println("COMPROVANTE SAQUE");
-					pws.println("Data: " + data);
+					pws.println("CONTA: " +numeroConta);
+					pws.println("Titular: " +titular);
+					pws.println("Data: " + Data.dataHora(data));
 					pws.println("-----------------------------------------------------------------------");
 					pws.println("  TIPO         VALOR            DATA");
 					pws.println("                             ");
 					pws.println("-----------------------------------------------------------------------");
 
-					pws.println(movimentacao.getTipo() + "	  -" + movimentacao.getValor() + "         "
-							+ movimentacao.getDatahora() + "\n");
-
+					pws.println(tipo + "	         " + valor + "              "
+							+ Data.dataHora(data) + "\n");
 					pws.flush();
 					pws.close();
 					fws.close();
@@ -406,18 +420,20 @@ public class Escreve {
 
 				case DEPOSITO:
 
-					String pathd = ".\\arquivos\\Comprovande_De_Deposito-" + titular + "-" + dataSemEspaco + ".txt";
+					String pathd = ".\\arquivos\\Comprovande_De_Deposito-" + titular + "-" + Data.dataHoraSemEspaco(data) + ".txt";
 					FileWriter fwd = new FileWriter(pathd, true);
 					PrintWriter pwd = new PrintWriter(fwd);
-					pwd.println("COMPROVANTE Deposito");
-					pwd.println("Data: " + data);
+					pwd.println("COMPROVANTE DEPOSITO");
+					pwd.println("CONTA: " +numeroConta);
+					pwd.println("Titular: " +titular);
+					pwd.println("Data: " + Data.dataHora(data));
 					pwd.println("-----------------------------------------------------------------------");
 					pwd.println("  TIPO         VALOR            DATA");
 					pwd.println("                             ");
 					pwd.println("-----------------------------------------------------------------------");
 
-					pwd.println(movimentacao.getTipo() + "   	 " + movimentacao.getValor() + "         "
-							+ movimentacao.getDatahora() + "\n");
+					pwd.println(tipo + "       " + valor + "            "
+							+ Data.dataHora(data) + "\n");
 
 					pwd.flush();
 					pwd.close();
@@ -428,7 +444,7 @@ public class Escreve {
 
 				}
 
-			}
+			
 
 		} catch (IOException e) {
 
