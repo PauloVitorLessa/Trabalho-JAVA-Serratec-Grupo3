@@ -3,7 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import entradasEsaidas.Escreve;
-import listas.Listas;
 import menus.Menu;
 
 public class SistemaBancario {
@@ -22,8 +21,7 @@ public class SistemaBancario {
 			e.printStackTrace();
 		}
 			
-		Escreve.Ler();
-		Listas.movimentacao.clear();
+		Escreve.Ler();		
 			
 		Menu.menuLogin();
 	}
