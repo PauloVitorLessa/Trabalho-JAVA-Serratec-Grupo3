@@ -18,6 +18,6 @@ no momento em que são solicitadas pelo usuário.
 Toda entrada de dados dos usuários foi tratada para evitar erros na execução do programa e inconsistências nas
 regras de negócio.
 
-OBS: Faltaram simbolos na conta gratuita do lucidchart :/
+OBS: ContaCorrente herda de Conta. Faltaram simbolos na conta gratuita do lucidchart :/
  
 ![Diagrama em branco - Página 3 (1)](https://user-images.githubusercontent.com/78815229/234146487-1a07bf9f-0b05-4097-b380-44f91fa79d34.png)
