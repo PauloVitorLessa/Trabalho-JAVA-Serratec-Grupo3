@@ -10,7 +10,7 @@
 
 
 O trabalho consistiu em criar um sistema bancário fictício em JAVA, aplicando todo o conhecimento adquirido em aula. 
-O sistema, por nós criado, carrega a memória a memória a partir de um arquivo de texto e, após o logout do usário,
+O sistema, por nós criado, carrega a memória a partir de um arquivo de texto e, após o logout do usário,
 salva as informações e movimentações bancarias em arquivo, sobrescrevendo o aquivo anterior, de modo que a cada nova 
 execução do programa, o mesmo não perca o histórico de movimentações.
 Toda movimentação e consulta, além de mostradas em tela, geram comprovantes em aquivos de texto individuais,
