@@ -1,12 +1,12 @@
-Trabalho-JAVA-Serratec-Grupo3
+* Trabalho-JAVA-Serratec-Grupo3
 
-integrantes:
+* integrantes:
 
-Paulo Vitor 
-Caio Botelho
-Vitor William
-Yago Romero
-Allan Ferreira
+* Paulo Vitor 
+* Caio Botelho
+* Vitor William
+* Yago Romero
+* Allan Ferreira
 
 
 O trabalho consistiu em criar um sistema bancário fictício em JAVA, aplicando todo o conhecimento adquirido em aula. 
